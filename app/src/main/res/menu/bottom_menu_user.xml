@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Trang chủ"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/tindang"
+        android:title="Tin đăng"
+        android:icon="@drawable/ic_tindang"
+        />
+
+    <item
+        android:title=""
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/giohang"
+        android:title="Giỏ hàng"
+        android:icon="@drawable/ic_cart" />
+    <item
+        android:id="@+id/taikhoan"
+        android:title="Tài khoản"
+        android:icon="@drawable/ic_account" />
+
+</menu>
