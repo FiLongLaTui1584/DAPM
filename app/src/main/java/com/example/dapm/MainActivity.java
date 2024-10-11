@@ -6,6 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+
+import com.example.dapm.Fragment.AccountFragment;
+import com.example.dapm.Fragment.CartFragment;
+import com.example.dapm.Fragment.HomeFragment;
+import com.example.dapm.Fragment.TinDangFragment;
 import com.example.dapm.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
