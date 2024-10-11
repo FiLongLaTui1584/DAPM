@@ -40,6 +40,7 @@
         android:src="@drawable/ic_posting"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="40dp"
+        android:id="@+id/fab"
         app:tint ="@color/main_color"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

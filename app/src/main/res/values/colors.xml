@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#FCC419</color>
     <color name="background_color">#F6F6F6</color>
+    <color name="lavender">#FFB909</color>
+    <color name="red">#FF0000</color>
 </resources>
