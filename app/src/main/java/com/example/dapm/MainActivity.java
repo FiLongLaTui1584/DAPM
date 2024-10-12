@@ -16,8 +16,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.example.dapm.Fragment.AccountFragment;
+import com.example.dapm.Fragment.CartFragment;
+import com.example.dapm.Fragment.HomeFragment;
+import com.example.dapm.Fragment.TinDangFragment;
 import com.example.dapm.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
