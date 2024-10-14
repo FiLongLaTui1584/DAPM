@@ -57,8 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 showBottomDialog();
             }
         });
+        
+        
+
 
     }
+
+
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -97,4 +102,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = com.google.android.material.R.style.Animation_MaterialComponents_BottomSheetDialog;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
+    
 }

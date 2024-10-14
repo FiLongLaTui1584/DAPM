@@ -7,12 +7,10 @@
     tools:context=".Fragment.TinDangFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Tin đăng"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/white"/>
-
+        android:id="@+id/recyclerTinDang"/>
 </FrameLayout>
