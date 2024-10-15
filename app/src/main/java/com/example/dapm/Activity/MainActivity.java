@@ -1,4 +1,4 @@
-package com.example.dapm;
+package com.example.dapm.Activity;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,7 @@ import com.example.dapm.Fragment.AccountFragment;
 import com.example.dapm.Fragment.CartFragment;
 import com.example.dapm.Fragment.HomeFragment;
 import com.example.dapm.Fragment.TinDangFragment;
+import com.example.dapm.R;
 import com.example.dapm.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
