@@ -10,12 +10,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dapm.R;
 
-public class DangKyActivity extends AppCompatActivity {
+public class DangNhapActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_dang_ky);
+        setContentView(R.layout.activity_dang_nhap);
     }
 }

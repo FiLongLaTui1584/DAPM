@@ -1,12 +1,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DangKyActivity">
+    tools:context=".Activity.DangNhapActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Đăng kí tài khoản" />
+                android:text="Đăng nhập" />
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -70,41 +70,7 @@
                     android:textSize="14sp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Họ và tên"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_text"
-                android:padding="16dp"
-                android:layout_marginBottom="24dp"
-                android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Số điện thoại"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_text"
-                android:padding="16dp"
-                android:layout_marginBottom="24dp"
-                android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Email"
+                    android:text="SĐT / Tên"
                     />
             </LinearLayout>
             <LinearLayout
@@ -124,39 +90,15 @@
                     android:text="Mật khẩu"
                     />
             </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <TextView
+                android:textColor="#155EBF"
+                android:textSize="14sp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginHorizontal="30dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/style_tick_sigup"
-                    android:paddingHorizontal="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/ic_tick"
-                        />
-                </LinearLayout>
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:layout_marginTop="1dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="Bằng việc Đăng kí, bạn đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Chợ Dỏm"
-                    />
-            </LinearLayout>
+                android:layout_marginStart="30dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Quên mật khẩu ?"
+                />
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -164,7 +106,7 @@
                 android:gravity="center_horizontal"
                 android:background="@drawable/style_button_sigup"
                 android:paddingVertical="10dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
                 <TextView
@@ -173,9 +115,18 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="ĐĂNG KÍ"
+                    android:text="ĐĂNG NHẬP"
                     />
             </LinearLayout>
+            <TextView
+                android:textColor="#155EBF"
+                android:textSize="15sp"
+                android:layout_marginBottom="25dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Chưa có tài khoản? Đăng kí tài khoản mới"
+                />
             <TextView
                 android:textColor="@color/black"
                 android:textSize="15sp"
