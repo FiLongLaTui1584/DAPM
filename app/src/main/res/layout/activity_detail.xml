@@ -1,0 +1,441 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.DetailActivity">
+
+  <!-- Thanh Header -->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="90dp"
+      android:background="@color/main_color"
+      android:paddingVertical="16dp"
+      android:paddingLeft="30dp"
+      android:orientation="vertical"
+      android:id="@+id/header">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+      <ImageView
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:src="@drawable/ic_cancel" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <!-- ScrollView chứa nội dung -->
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/header"
+      android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:layout_marginBottom="10dp"
+          android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:background="@drawable/sample_image"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:background="@drawable/sample_image"
+            />
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="30dp"
+          android:layout_marginEnd="30dp"
+          android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Hahahaha hohoho hehe"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_love"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_report"
+            />
+      </LinearLayout>
+      <TextView
+          android:textColor="@color/red"
+          android:textSize="25sp"
+          android:textStyle="bold"
+          android:layout_marginBottom="5dp"
+          android:layout_marginStart="30dp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="9.999.999 đ"
+          />
+      <TextView
+          android:textColor="@color/black"
+          android:textSize="13sp"
+          android:textStyle="bold"
+          android:layout_marginBottom="30dp"
+          android:layout_marginHorizontal="30dp"
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:layout_weight="1"
+          android:text="Ngày đăng: 30/2/2024\nĐịa điểm: Tp Hồ chí Minh"
+          />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/style_double_border_background"
+          android:orientation="vertical"
+          android:paddingVertical="20dp"
+          android:paddingHorizontal="30dp"
+          android:layout_marginBottom="30dp">
+
+        <!-- Profile Information Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+
+          <!-- Profile Image -->
+          <com.google.android.material.imageview.ShapeableImageView
+              android:layout_width="50dp"
+              android:layout_height="50dp"
+              android:layout_marginEnd="15dp"
+              android:src="@drawable/sample_image"
+              android:scaleType="centerCrop" />
+
+          <!-- User Info -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+            <!-- User Name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+
+            <!-- Star Rating and Reviews -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+              <!-- Star Rating -->
+              <ImageView
+                  android:layout_width="16dp"
+                  android:layout_height="16dp"
+                  android:src="@drawable/ic_star"
+                  android:layout_marginEnd="4dp" />
+
+              <ImageView
+                  android:layout_width="16dp"
+                  android:layout_height="16dp"
+                  android:src="@drawable/ic_star"
+                  android:layout_marginEnd="4dp" />
+
+              <ImageView
+                  android:layout_width="16dp"
+                  android:layout_height="16dp"
+                  android:src="@drawable/ic_star"
+                  android:layout_marginEnd="4dp" />
+
+              <ImageView
+                  android:layout_width="16dp"
+                  android:layout_height="16dp"
+                  android:src="@drawable/ic_star"
+                  android:layout_marginEnd="4dp" />
+
+              <ImageView
+                  android:layout_width="16dp"
+                  android:layout_height="16dp"
+                  android:src="@drawable/ic_star"
+                  android:layout_marginEnd="8dp" />
+
+              <!-- Rating Value -->
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="5.0"
+                  android:textSize="12sp"
+                  android:textColor="#000000"
+                  android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Reviews Count -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(55 Đánh giá)"
+                android:textSize="12sp"
+                android:textColor="#0559E0"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+          </LinearLayout>
+        </LinearLayout>
+
+        <!-- View Store Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/style_button_xem_cua_hang"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="16dp">
+
+          <!-- Store Icon -->
+          <ImageView
+              android:layout_width="16dp"
+              android:layout_height="16dp"
+              android:src="@drawable/ic_store"
+              android:layout_marginEnd="8dp" />
+
+          <!-- Button Text -->
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Xem cửa hàng"
+              android:textColor="#000000"
+              android:textSize="14sp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+        <!-- Phần Mô tả -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô tả:"
+            android:textColor="#0559E0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingStart="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit ametkvhegakvhebrkvhsvkiuesrhvaekrjvbaerkjvjbavckjadbvjkaebvjvbkjrjvbakjcjkba rfjkhwbfvjkcehfbekshrnbesxngrfliewugncfnkelrjgmertinhwroifxfubwgendbreufhxgnnkvjkhbesrkvjhd"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="10dp"/>
+
+        <!-- Phần Đặc điểm nổi bật -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            android:layout_marginBottom="100dp">
+
+          <!-- Tình trạng -->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingVertical="10dp"
+              android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_condition" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng: Đã sử dụng"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:paddingStart="8dp"
+                />
+          </LinearLayout>
+
+          <!-- Bảo hành -->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingVertical="10dp"
+              android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_bao_hanh" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chính sách bảo hành: Không có"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:paddingStart="8dp"
+                />
+          </LinearLayout>
+
+          <!-- Xuất xứ -->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingVertical="10dp"
+              android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_xuat_xu" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xuất xứ: Việt Nam"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:paddingStart="8dp"
+                />
+          </LinearLayout>
+
+          <!-- Hướng dẫn sử dụng -->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingVertical="10dp"
+              android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_hdsd" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hướng dẫn sử dụng: Không có"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:paddingStart="8dp"
+                />
+          </LinearLayout>
+        </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+
+  <!-- Thanh điều hướng dưới cùng -->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:background="@color/white"
+      android:layout_alignParentBottom="true">
+
+    <!-- Nút Chat -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+      <ImageView
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:src="@drawable/ic_message" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Chat"
+          android:textColor="#000000"
+          android:textSize="12sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#E0E0E0"/>
+
+    <!-- Nút Giỏ hàng -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+      <ImageView
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:src="@drawable/ic_cart" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Giỏ hàng"
+          android:textColor="#000000"
+          android:textSize="12sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#E0E0E0"/>
+
+    <!-- Nút Mua ngay -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/main_color"
+        android:padding="20dp">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Mua ngay"
+          android:textColor="@color/white"
+          android:textSize="14sp"
+          android:textStyle="bold" />
+    </LinearLayout>
+  </LinearLayout>
+</RelativeLayout>
