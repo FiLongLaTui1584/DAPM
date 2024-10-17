@@ -21,7 +21,7 @@
                     android:id="@+id/rg67xx16mpls"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFB909"
+                    android:background="@color/main_color"
                     android:paddingVertical="17dp"
                     android:paddingHorizontal="18dp"
                     android:orientation="vertical">
@@ -30,6 +30,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+                        android:paddingTop="35dp"
                         android:orientation="horizontal">
                         <TextView
                             android:id="@+id/rpppeog7kzm"
