@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Màu nền của hình tròn -->
+    <solid android:color="@color/white" />
+
+    <!-- Viền xung quanh hình tròn (tùy chọn) -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/grey" />
+
+    <size
+        android:width="50dp"
+        android:height="50dp" />
+
+</shape>

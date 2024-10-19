@@ -33,7 +33,7 @@ public class TinDangAdapter extends RecyclerView.Adapter<TinDangAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View viewTinDang= layoutInflater.inflate(R.layout.itemtin,parent,false);
+        View viewTinDang= layoutInflater.inflate(R.layout.item_tin,parent,false);
         ViewHolder viewHolderTD =new ViewHolder(viewTinDang);
         return viewHolderTD;
     }
