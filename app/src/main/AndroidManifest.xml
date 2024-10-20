@@ -13,15 +13,20 @@
         android:theme="@style/Theme.DAPM"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.TheoDoiThuNhapActivity"
-            android:exported="true">
+            android:name=".Activity.XemProfileUserKhacActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.TheoDoiThuNhapActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".Activity.SearchActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.ChatDetailActivity"
             android:exported="true" />
@@ -36,12 +41,8 @@
             android:exported="true" />
         <activity
             android:name=".Activity.DetailActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.DangNhapActivity"
@@ -51,7 +52,9 @@
             android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" >
+
+        </activity>
     </application>
 
 </manifest>
