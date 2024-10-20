@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheetlayout);
 
+/*
         LinearLayout videoLayout = dialog.findViewById(R.id.layoutVideo);
+*/
         LinearLayout inputImg = dialog.findViewById(R.id.inputImg);
         LinearLayout layoutChinhSach = dialog.findViewById(R.id.layoutChinhSach);
         LinearLayout layoutXuatXu = dialog.findViewById(R.id.layoutXuatXu);

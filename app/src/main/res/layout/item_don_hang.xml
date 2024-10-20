@@ -1,0 +1,61 @@
+<!-- res/layout/item_order.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/style_button_white"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
+
+    <!-- Image Section -->
+    <ImageView
+        android:id="@+id/order_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/sample_image"/>
+
+    <!-- Order Title (Lorem Ipsum) -->
+    <TextView
+        android:id="@+id/order_name"
+        android:layout_width="135dp"
+        android:layout_height="60dp"
+        android:textColor="@color/black"
+        android:text="Lorem ipsum dolor sit amet consectetur. wkeagfjawgbajhj,ehevbggawjhgfawe,jjh"
+        android:textSize="16sp"
+        android:maxLines="3" />
+
+    <!-- Text and Price Section -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginStart="40dp">
+
+        <!-- Income Section -->
+        <TextView
+            android:id="@+id/order_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ 456.789 VND"
+            android:textSize="18sp"
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+
+        <!-- Date (06/10/2024) -->
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6/10/2024"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+
+</LinearLayout>

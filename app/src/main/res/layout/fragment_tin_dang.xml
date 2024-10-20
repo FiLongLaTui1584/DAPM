@@ -23,7 +23,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/main_color"
                     android:paddingVertical="17dp"
-                    android:paddingHorizontal="18dp"
+                    android:paddingHorizontal="30dp"
                     android:orientation="vertical">
                     <LinearLayout
                         android:id="@+id/rnvgolsbpod9"
@@ -59,7 +59,7 @@
                     android:gravity="center_vertical"
                     android:background="#FFFFFF"
                     android:paddingVertical="11dp"
-                    android:paddingHorizontal="25dp"
+                    android:paddingHorizontal="30dp"
                     android:orientation="horizontal">
                     <com.makeramen.roundedimageview.RoundedImageView
                         app:riv_corner_radius="5dp"

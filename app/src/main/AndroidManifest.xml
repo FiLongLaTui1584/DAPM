@@ -13,8 +13,8 @@
         android:theme="@style/Theme.DAPM"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.ChatDetailActivity"
-            android:exported="true" >
+            android:name=".Activity.TheoDoiThuNhapActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +22,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.DanhSachChatActivity"
+            android:name=".Activity.SearchActivity"
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".Activity.ChatDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.DanhSachChatActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.QuanLyYeuThichActivity"
             android:exported="true" />
