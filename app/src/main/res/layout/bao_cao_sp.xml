@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/dialogbkg">
+
+    <!-- Thanh công cụ với nút quay lại và tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="viewStart"
+            android:text="Báo cáo sản phẩm"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textColor="@color/main_color"
+            android:textSize="25dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_clear_24"
+            android:id="@+id/cancelButton"/>
+
+
+    </LinearLayout>
+
+    <!-- Đường phân cách -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:layout_marginTop="10dp">
+
+        <ImageButton
+            android:id="@+id/btnAddImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@drawable/add_img" />
+
+
+    </LinearLayout>
+
+    <!-- Nhóm Radio để chọn vấn đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tin rao này có vấn đề gì?"
+        android:textColor="@color/black"
+        android:layout_marginStart="30dp"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupReasons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/radioScam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lừa đảo" />
+
+        <RadioButton
+            android:id="@+id/radioDuplicate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trùng lặp" />
+
+        <RadioButton
+            android:id="@+id/radioSold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sản phẩm đã bán" />
+
+        <RadioButton
+            android:id="@+id/radioNoContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Không liên lạc được" />
+
+        <RadioButton
+            android:id="@+id/radioIncorrectInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin không đúng thực tế" />
+    </RadioGroup>
+
+    <!-- Phần thông tin liên hệ -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thông tin để Chợ Dòm liên hệ với bạn"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="30dp"/>
+
+    <!-- Trường Số Điện Thoại -->
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại của bạn"
+        android:inputType="phone"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/style_button_xem_cua_hang"
+        android:padding="12dp"/>
+
+    <!-- Trường Email -->
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email của bạn"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/style_button_xem_cua_hang"
+        android:padding="12dp"/>
+
+    <!-- Nút Gửi Báo Cáo -->
+    <Button
+        android:id="@+id/btnSubmitReport"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Gửi báo cáo"
+        android:textSize="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="30dp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/main_color"/>
+
+</LinearLayout>

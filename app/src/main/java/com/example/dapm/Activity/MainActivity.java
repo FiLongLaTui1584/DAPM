@@ -58,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 showBottomDialog();
             }
         });
-        
-        
-
-
     }
 
 
