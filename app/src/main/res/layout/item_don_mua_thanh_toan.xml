@@ -24,7 +24,6 @@
         android:textSize="16sp"
         android:maxLines="3" />
 
-    <!-- Text and Price Section -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
@@ -32,12 +31,11 @@
         android:gravity="center_vertical"
         android:layout_marginStart="40dp">
 
-        <!-- Income Section -->
         <TextView
-            android:id="@+id/order_income"
+            android:id="@+id/order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+ 456.789 VND"
+            android:text="456.789 VND"
             android:textSize="18sp"
             android:textColor="@color/red"
             android:layout_gravity="center_vertical"
@@ -45,13 +43,12 @@
             android:layout_marginBottom="12dp"/>
 
 
-        <!-- Date (06/10/2024) -->
         <TextView
-            android:id="@+id/order_date"
+            android:id="@+id/order_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6/10/2024"
-            android:textSize="12sp"
+            android:text="x 2"
+            android:textSize="17sp"
             android:textColor="@color/black"
             android:layout_gravity="end"/>
     </LinearLayout>
