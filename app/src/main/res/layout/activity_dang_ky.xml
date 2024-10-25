@@ -57,125 +57,99 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Đăng kí tài khoản" />
-            <LinearLayout
+            <EditText
+                android:id="@+id/sigup_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Họ và tên"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Họ và tên" />
+
+            <EditText
+                android:id="@+id/sigup_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Số điện thoại"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Số điện thoại"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/sigup_Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Email"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/sigup_Pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Mật khẩu"
-                    />
-            </LinearLayout>
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword" />
+
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/tickButton"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/style_tick_sigup"
-                    android:paddingHorizontal="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/ic_tick"
-                        />
-                </LinearLayout>
+                    android:drawableEnd="@drawable/ic_tick"
+                    android:drawablePadding="5dp"
+                    android:layout_marginEnd="8dp" />
+
+
                 <TextView
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:layout_marginTop="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="Bằng việc Đăng kí, bạn đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Chợ Dỏm"
-                    />
+                    android:text="Bằng việc Đăng kí, bạn đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Chợ Dỏm" />
             </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <Button
+                android:id="@+id/sigup_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:background="@drawable/style_button_sigup"
-                android:paddingVertical="10dp"
-                android:layout_marginBottom="25dp"
+                android:paddingVertical="5dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="ĐĂNG KÍ"
-                    />
-            </LinearLayout>
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="ĐĂNG KÝ" />
+
             <TextView
                 android:textColor="@color/black"
                 android:textSize="15sp"

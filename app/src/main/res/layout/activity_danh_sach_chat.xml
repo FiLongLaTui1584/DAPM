@@ -25,10 +25,11 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/ic_cancel" />
+                android:background="@drawable/ic_cancel"
+                android:id="@+id/btnBack" />
 
             <TextView
                 android:textColor="@color/black"

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1072750890757",
+    "project_id": "dapm-d6cca",
+    "storage_bucket": "dapm-d6cca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072750890757:android:2955992f2933b9b77fb16c",
+        "android_client_info": {
+          "package_name": "com.example.dapm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcueZzg83qetwqhGsBBPEanuEPTTtFJDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

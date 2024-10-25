@@ -57,41 +57,33 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Đăng nhập" />
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <EditText
+                android:id="@+id/sigin_Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="SĐT / Tên"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="SĐT / Tên" />
+
+            <EditText
+                android:id="@+id/sigin_Pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/style_text"
                 android:padding="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Mật khẩu"
-                    />
-            </LinearLayout>
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword" />
+
             <TextView
+                android:id="@+id/sigin_ForgotPass"
                 android:textColor="#155EBF"
                 android:textSize="14sp"
                 android:layout_marginBottom="24dp"
@@ -100,26 +92,22 @@
                 android:layout_width="wrap_content"
                 android:text="Quên mật khẩu ?"
                 />
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <Button
+                android:id="@+id/sigin_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:background="@drawable/style_button_sigup"
-                android:paddingVertical="10dp"
+                android:paddingVertical="5dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="ĐĂNG NHẬP"
-                    />
-            </LinearLayout>
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="ĐĂNG NHẬP" />
+
             <TextView
+                android:id="@+id/sigin_Create"
                 android:textColor="#155EBF"
                 android:textSize="15sp"
                 android:layout_marginBottom="25dp"
