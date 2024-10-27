@@ -96,8 +96,9 @@ public class DangNhapActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         String uid = mAuth.getCurrentUser().getUid();
-                        checkUserAccessLevel(uid);
                         FirebaseUser user = mAuth.getCurrentUser();
+                        checkUserAccessLevel(uid);
+
                         //Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         /*Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -127,20 +128,22 @@ public class DangNhapActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
 
-                if (documentSnapshot.getString("IsAdmin") != null) {
+                Long IsAdmin = documentSnapshot.getLong("IsAdmin");
+                if (IsAdmin != null && IsAdmin == 1) {
                     Toast.makeText(DangNhapActivity.this, "Admin đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     finish();
-                } else if (documentSnapshot.getString("NormalUser") != null) {
-                    Toast.makeText(DangNhapActivity.this, "NormalUser đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
-                } else {
-                    Toast.makeText(DangNhapActivity.this, "Không xác định được quyền truy cập của người dùng.", Toast.LENGTH_SHORT).show();
                 }
             }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(DangNhapActivity.this, "Lỗi truy vấn quyền người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
+
 }
 
 

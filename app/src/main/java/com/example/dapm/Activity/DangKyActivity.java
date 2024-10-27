@@ -123,7 +123,7 @@ public class DangKyActivity extends AppCompatActivity {
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("name", name);
         userInfo.put("phone", phone);
-        userInfo.put("NormalUser", 1);
+        userInfo.put("IsAdmin", 0);
 
         // Lưu thông tin vào Firestore
         db.collection("users")
