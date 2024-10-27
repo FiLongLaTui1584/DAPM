@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    android:title="Trang chủ"
+    android:id="@+id/bottomTrangChu"
+    android:icon="@drawable/icons8_home_24"
+    />
+    <item
+        android:title="Quản lí tin"
+        android:id="@+id/bottomQuanLiTin"
+        android:icon="@drawable/icons8_list_24"
+        />
+    <item
+        android:title="Giao dịch"
+        android:id="@+id/bottomGiaoDich"
+        android:icon="@drawable/icons8_package_24"
+        />
+    <item
+        android:title="Người dùng"
+        android:id="@+id/bottomNguoiDung"
+        android:icon="@drawable/icons8_people_24"
+        />
+    <item
+        android:title="Cá nhân"
+        android:id="@+id/bottomCaNhan"
+        android:icon="@drawable/icons8_person_24"
+        />
+</menu>

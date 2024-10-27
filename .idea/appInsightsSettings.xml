@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.dapm" />
+                  <option name="mobileSdkAppId" value="1:1072750890757:android:2955992f2933b9b77fb16c" />
+                  <option name="projectId" value="dapm-d6cca" />
+                  <option name="projectNumber" value="1072750890757" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

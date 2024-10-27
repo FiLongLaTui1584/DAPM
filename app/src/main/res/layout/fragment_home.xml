@@ -52,13 +52,7 @@
                             android:text="Tìm kiếm trên Chợ Dỏm"
                             />
                     </LinearLayout>
-                    <ImageView
-                        android:id="@+id/bell"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/ic_bell"
-                        />
+
                     <ImageButton
                         android:id="@+id/HomeChat"
                         android:layout_width="25dp"

@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.FragmentQLTD.DangHienThiFragment">
+    tools:context=".Activity.ADMIN.fragment.TatCaNguoiDungFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerTinDang"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="515dp" />
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

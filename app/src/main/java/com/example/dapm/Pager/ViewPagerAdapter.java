@@ -1,4 +1,4 @@
-package com.example.dapm.Adapter;
+package com.example.dapm.Pager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

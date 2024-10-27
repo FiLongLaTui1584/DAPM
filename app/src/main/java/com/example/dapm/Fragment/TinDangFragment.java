@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dapm.Adapter.TinDangAdapter;
-import com.example.dapm.Adapter.ViewPagerAdapter;
+import com.example.dapm.Pager.ViewPagerAdapter;
 import com.example.dapm.R;
 import com.example.dapm.model.TinDang;
 import com.google.android.material.tabs.TabLayout;
