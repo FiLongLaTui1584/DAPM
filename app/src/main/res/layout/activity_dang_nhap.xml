@@ -33,6 +33,7 @@
                     android:layout_marginTop="40dp"
                     android:orientation="horizontal">
                     <ImageView
+                        android:id="@+id/cancel"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_cancel" />
@@ -67,7 +68,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:hint="SĐT / Tên" />
+                android:hint="Email" />
 
             <EditText
                 android:id="@+id/sigin_Pass"

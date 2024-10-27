@@ -1,6 +1,7 @@
 package com.example.dapm.Activity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class TheoDoiThuNhapActivity extends AppCompatActivity {
 
+    private ImageView cancel;
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
     private List<Order> orderList;
@@ -25,14 +27,23 @@ public class TheoDoiThuNhapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theo_doi_thu_nhap);
 
-        // Initialize views
-        recyclerView = findViewById(R.id.recyclerview_orders);
+        addControl();
+        addEvent();
 
         // Set up RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = getSampleOrders(); // Replace with actual data
         orderAdapter = new OrderAdapter(orderList);
         recyclerView.setAdapter(orderAdapter);
+    }
+
+    private void addEvent() {
+        cancel.setOnClickListener(v -> finish());
+    }
+
+    private void addControl() {
+        recyclerView = findViewById(R.id.recyclerview_orders);
+        cancel = findViewById(R.id.cancel);
     }
 
 

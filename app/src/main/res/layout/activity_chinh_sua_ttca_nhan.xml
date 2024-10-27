@@ -26,6 +26,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
+                        android:id="@+id/cancel"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="@drawable/ic_cancel"
@@ -60,23 +61,26 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
-                    android:textColor="#464B4C"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Họ và tên"
-                    />
-                <TextView
+                    android:textColor="#464B4C"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Trần Phi Long"
-                    />
+                    android:background="@android:color/transparent"
+                    android:inputType="text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,23 +90,26 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
-                    android:textColor="#464B4C"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Địa chỉ của bạn"
-                    />
-                <TextView
+                    android:textColor="#464B4C"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="123 đường abc, Quận xyz, TPHCM"
-                    />
+                    android:background="@android:color/transparent"
+                    android:inputType="text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,23 +119,26 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
                     android:textColor="#464B4C"
                     android:textSize="8sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_phone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Số điện thoại"
-                    />
-                <TextView
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="0123456789"
-                    />
+                    android:background="@android:color/transparent"
+                    android:inputType="phone" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -138,32 +148,51 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
-                    android:textColor="#464B4C"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Giới thiệu"
-                    />
-                <TextView
+                    android:textColor="#464B4C"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="12sp"
+                    android:background="@android:color/transparent"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:maxLines="4" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="30dp">
+                <TextView
+                    android:textColor="#464B4C"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Mật khẩu" />
+                <TextView
+                    android:id="@+id/save_password"
+                    android:textColor="#155EBF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Viết vài dòng giới thiệu về bạn"
-                    />
+                    android:text="Đổi mật khẩu" />
             </LinearLayout>
-            <TextView
-                android:textColor="#464B4C"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"
-                android:layout_marginStart="30dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Đổi mật khẩu" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,23 +202,27 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
-                    android:textColor="#464B4C"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Mật khẩu cũ"
-                    />
-                <TextView
+                    android:textColor="#464B4C"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_old_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="....."
-                    />
+                    android:background="@android:color/transparent"
+                    android:padding="0dp"
+                    android:inputType="textPassword" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,23 +232,27 @@
                 android:layout_marginBottom="14dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mật khẩu mới"
                     android:textColor="#464B4C"
                     android:textSize="8sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_new_password"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Mật khẩu mới"
-                    />
-                <TextView
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="....."
-                    />
+                    android:background="@android:color/transparent"
+                    android:padding="0dp"
+                    android:inputType="textPassword" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,42 +262,40 @@
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
                 android:orientation="vertical">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhập lại mật khẩu mới"
                     android:textColor="#464B4C"
                     android:textSize="8sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/change_new2_password"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Nhập lại mật khẩu mới"
-                    />
-                <TextView
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="....."
-                    />
+                    android:background="@android:color/transparent"
+                    android:padding="0dp"
+                    android:inputType="textPassword" />
             </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <Button
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:background="@drawable/style_button_sigup"
-                android:paddingVertical="10dp"
                 android:layout_marginBottom="25dp"
                 android:layout_marginHorizontal="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Lưu"
-                    />
-            </LinearLayout>
+                android:text="Lưu"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

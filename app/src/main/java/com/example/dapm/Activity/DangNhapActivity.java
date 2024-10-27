@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
     private EditText siginEmail, siginPass;
     private Button siginButton;
+    private ImageView cancel;
     private TextView siginForgotPass, siginCreate;
     private FirebaseAuth mAuth;
 
@@ -59,6 +61,8 @@ public class DangNhapActivity extends AppCompatActivity {
                 sendPasswordResetEmail(email);
             }
         });
+
+        cancel.setOnClickListener(v -> finish());
     }
 
     private void addControl() {
@@ -68,6 +72,7 @@ public class DangNhapActivity extends AppCompatActivity {
         siginButton = findViewById(R.id.sigin_button);
         siginForgotPass = findViewById(R.id.sigin_ForgotPass);
         siginCreate = findViewById(R.id.sigin_Create);
+        cancel = findViewById(R.id.cancel);
     }
 
     private void loginUser() {
@@ -75,7 +80,7 @@ public class DangNhapActivity extends AppCompatActivity {
         String password = siginPass.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bạn phải nhập đầy đủ các ô !", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -83,12 +88,12 @@ public class DangNhapActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(DangNhapActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(DangNhapActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DangNhapActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
