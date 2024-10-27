@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAlignment="center">
+
+    <CheckBox
+        android:id="@+id/checkBoxCart"
+        android:layout_width="65dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewCart"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtTenspCart"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm"
+            android:textSize="21dp"
+            android:textColor="@color/black"></TextView>
+        <TextView
+            android:id="@+id/txtKichthuocspCart"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Kích thước:"
+            android:textSize="19dp"
+            android:textColor="@color/grey"></TextView>
+        <TextView
+            android:id="@+id/soluongCart"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Số lượng:5"
+            android:textSize="19dp"
+            android:textColor="@color/black"
+            ></TextView>
+
+
+        <TextView
+            android:id="@+id/txtGiaCart"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="100.000"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="21dp"></TextView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xóa"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
