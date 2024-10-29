@@ -1,27 +1,39 @@
 package com.example.dapm.model;
 
 public class Review {
-    private int userAvatar;
-    private String userName;
-    private String userComment;
+    private String reviewerID;
+    private String reviewContent;
+    private int rate;
 
-    public Review(int userAvatar, String userName, String userComment) {
-        this.userAvatar = userAvatar;
-        this.userName = userName;
-        this.userComment = userComment;
+    public Review() {}
+
+    public Review(String reviewerID, String reviewContent, int rate) {
+        this.reviewerID = reviewerID;
+        this.reviewContent = reviewContent;
+        this.rate = rate;
     }
 
-    // Getters and setters for all fields
-    public int getUserAvatar() {
-        return userAvatar;
+    public String getReviewerID() {
+        return reviewerID;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setReviewerID(String reviewerID) {
+        this.reviewerID = reviewerID;
     }
 
-    public String getUserComment() {
-        return userComment;
+    public String getReviewContent() {
+        return reviewContent;
+    }
+
+    public void setReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }
-

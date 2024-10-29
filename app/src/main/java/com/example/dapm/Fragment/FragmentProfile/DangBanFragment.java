@@ -28,15 +28,22 @@ public class DangBanFragment extends Fragment {
     private FirebaseFirestore db;
     private String sellerID;
 
-    public void setSellerID(String sellerID) {
-        this.sellerID = sellerID;
+    public static DangBanFragment newInstance(String sellerID) {
+        DangBanFragment fragment = new DangBanFragment();
+        Bundle args = new Bundle();
+        args.putString("sellerID", sellerID);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dang_ban, container, false);
+
+        if (getArguments() != null) {
+            sellerID = getArguments().getString("sellerID");
+        }
 
         recyclerViewProducts = view.findViewById(R.id.recycler_view_dang_ban);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -85,6 +92,6 @@ public class DangBanFragment extends Fragment {
                     }
                     productAdapter.notifyDataSetChanged();
                 })
-                .addOnFailureListener(e -> Log.e("DangBanFragment", "Error loading products for seller", e));
+                .addOnFailureListener(e -> Log.e("DangBanFragment", "Lỗi khi tải sản phẩm cho người bán", e));
     }
 }

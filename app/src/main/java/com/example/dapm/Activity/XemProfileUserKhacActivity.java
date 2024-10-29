@@ -51,15 +51,18 @@ public class XemProfileUserKhacActivity extends AppCompatActivity {
     private void setupViewPager_TabLayout(String sellerID) {
         ProfilePagerAdapter adapter = new ProfilePagerAdapter(getSupportFragmentManager());
 
-        DangBanFragment dangBanFragment = new DangBanFragment();
-        dangBanFragment.setSellerID(sellerID);
+        // Sử dụng phương thức newInstance để truyền sellerID dưới dạng tham số
+        DangBanFragment dangBanFragment = DangBanFragment.newInstance(sellerID);
+        DanhGiaFragment danhGiaFragment = DanhGiaFragment.newInstance(sellerID);
 
         adapter.addFragment(dangBanFragment, "Đang Bán");
-        adapter.addFragment(new DanhGiaFragment(), "Đánh Giá");
+        adapter.addFragment(danhGiaFragment, "Đánh Giá");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
 
 
     private void addEvent() {
