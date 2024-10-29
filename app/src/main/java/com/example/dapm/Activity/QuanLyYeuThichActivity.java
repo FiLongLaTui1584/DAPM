@@ -32,12 +32,12 @@ public class QuanLyYeuThichActivity extends AppCompatActivity {
         recyclerViewProducts.setLayoutManager(gridLayoutManager);
 
         // Sample data for Products
-        productList = new ArrayList<>();
+        productList = new ArrayList<>();/*
         productList.add(new Product(R.drawable.sample_image, "Sản phẩm 1", "9.999.999 đ", "30/2/2024", "Tp Hồ Chí Minh"));
         productList.add(new Product(R.drawable.sample_image, "Sản phẩm 2", "8.888.888 đ", "29/2/2024", "Hà Nội"));
         productList.add(new Product(R.drawable.sample_image, "Sản phẩm 3", "7.777.777 đ", "28/2/2024", "Đà Nẵng"));
         productList.add(new Product(R.drawable.sample_image, "Sản phẩm 4", "6.666.666 đ", "27/2/2024", "Cần Thơ"));
-        productList.add(new Product(R.drawable.sample_image, "Sản phẩm 5", "5.555.555 đ", "26/2/2024", "Hải Phòng"));
+        productList.add(new Product(R.drawable.sample_image, "Sản phẩm 5", "5.555.555 đ", "26/2/2024", "Hải Phòng"));*/
 
         // Initialize ProductAdapter
         productAdapter = new ProductAdapter(productList);

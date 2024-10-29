@@ -37,10 +37,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.userAvatar.setImageResource(review.getUserAvatar());
         holder.userName.setText(review.getUserName());
         holder.userComment.setText(review.getUserComment());
-        holder.timestamp.setText(review.getTimestamp());
-        holder.productImage.setImageResource(review.getProductImage());
-        holder.productName.setText(review.getProductName());
-        holder.productPrice.setText(review.getProductPrice());
     }
 
     @Override
@@ -49,19 +45,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     }
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
-        ImageView userAvatar, productImage;
-        TextView userName, userComment, timestamp, productName, productPrice;
+        ImageView userAvatar;
+        TextView userName, userComment;
 
         public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userAvatar = itemView.findViewById(R.id.img_user_avatar);
-            userName = itemView.findViewById(R.id.tv_user_name);
-            userComment = itemView.findViewById(R.id.tv_user_comment);
-            timestamp = itemView.findViewById(R.id.tv_timestamp);
-            productImage = itemView.findViewById(R.id.img_product);
-            productName = itemView.findViewById(R.id.tv_img_name);
-            productPrice = itemView.findViewById(R.id.tv_price);
+            userAvatar = itemView.findViewById(R.id.reviewerAvatar);
+            userName = itemView.findViewById(R.id.reviewerName);
+            userComment = itemView.findViewById(R.id.reviewer_cmt);
         }
     }
 }

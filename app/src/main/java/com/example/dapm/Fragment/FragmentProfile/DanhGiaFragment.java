@@ -32,13 +32,10 @@ public class DanhGiaFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         reviewList = new ArrayList<>();
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
-        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi", "1 giây trước", R.drawable.sample_image, "hahahaha hohoho", "9.999.999 đ"));
+        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi"));
+        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi"));
+        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi"));
+        reviewList.add(new Review(R.drawable.sample_image, "Mèo của Giáp", "Thằng này scam tôi"));
 
 
         reviewAdapter = new ReviewAdapter(getContext(), reviewList);
