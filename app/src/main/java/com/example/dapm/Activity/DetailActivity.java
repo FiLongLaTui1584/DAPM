@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.dapm.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,11 +32,11 @@ public class DetailActivity extends AppCompatActivity {
     private TextView detailTitle, detailPrice, detailLocation,
             detailDescription, detailTinhTrang, detailBaoHanh, detailXuatXu, detailHDSD, detailSellerName;
     private ImageButton reportButton;
-    private ImageView cancel, detailSellerAvatar;
-    private String sellerID;
-    private LinearLayout detailViewStoreButton;
+    private ImageView cancel, detailSellerAvatar, detailEdit, detailDelete, detailFavButton;
+    private String sellerID, productID;
+    private LinearLayout detailViewStoreButton, detailChatButton, detailSellerInfo;
     private FirebaseFirestore db;
-
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,20 @@ public class DetailActivity extends AppCompatActivity {
                 showReportBottomSheet();
             }
         });
+
         cancel.setOnClickListener(v -> finish());
+
         detailViewStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setupViewStoreButton();            }
+        });
+
+        detailChatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToChatDetail();
+            }
         });
     }
 
@@ -77,12 +88,19 @@ public class DetailActivity extends AppCompatActivity {
         reportButton = findViewById(R.id.reportButton);
         cancel = findViewById(R.id.cancel);
         detailViewStoreButton = findViewById(R.id.detailViewStoreButton);
+        detailChatButton = findViewById(R.id.detailChatButton);
+        detailDelete= findViewById(R.id.detailDelete);
+        detailEdit = findViewById(R.id.detailEdit);
+        detailSellerInfo= findViewById(R.id.detailSellerInfo);
+        detailFavButton= findViewById(R.id.detailFavButton);
 
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
     private void displayProductDetails() {
         sellerID = getIntent().getStringExtra("sellerID");
+        productID = getIntent().getStringExtra("productID");
 
         String productImage1 = getIntent().getStringExtra("productImage1");
         String productImage2 = getIntent().getStringExtra("productImage2");
@@ -117,6 +135,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void getSellerDetails() {
+        sellerID = getIntent().getStringExtra("sellerID");
+
         if (sellerID != null) {
             db.collection("users").document(sellerID)
                     .get()
@@ -127,9 +147,41 @@ public class DetailActivity extends AppCompatActivity {
                                 String sellerName = documentSnapshot.getString("name");
                                 String sellerAvatar = documentSnapshot.getString("avatar");
 
-                                // Cập nhật UI
+                                // Cập nhật giao diện chi tiết người bán
                                 detailSellerName.setText(sellerName);
                                 Picasso.get().load(sellerAvatar).into(detailSellerAvatar);
+
+                                // Kiểm tra người dùng đăng nhập
+                                if (auth.getCurrentUser() != null) {
+                                    String currentUserID = auth.getCurrentUser().getUid();
+
+                                    // Diều chỉnh giao diện nếu seller xem sản phẩm của mình
+                                    if (sellerID.equals(currentUserID)) {
+                                        detailEdit.setVisibility(View.VISIBLE);
+                                        detailDelete.setVisibility(View.VISIBLE);
+
+                                        detailFavButton.setVisibility(View.GONE);
+                                        reportButton.setVisibility(View.GONE);
+                                        detailSellerInfo.setVisibility(View.GONE);
+                                    } else {
+                                        // Điều chỉnh giao diện cho user thường
+                                        detailFavButton.setVisibility(View.VISIBLE);
+                                        reportButton.setVisibility(View.VISIBLE);
+                                        detailSellerInfo.setVisibility(View.VISIBLE);
+
+
+                                        detailEdit.setVisibility(View.GONE);
+                                        detailDelete.setVisibility(View.GONE);
+                                    }
+                                } else {
+                                    //Khách vãng lai
+                                    reportButton.setVisibility(View.VISIBLE);
+                                    detailSellerInfo.setVisibility(View.VISIBLE);
+
+                                    detailFavButton.setVisibility(View.GONE);
+                                    detailEdit.setVisibility(View.GONE);
+                                    detailDelete.setVisibility(View.GONE);
+                                }
                             }
                         }
                     })
@@ -140,6 +192,7 @@ public class DetailActivity extends AppCompatActivity {
                     });
         }
     }
+
 
     private void showReportBottomSheet() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DetailActivity.this);
@@ -165,5 +218,37 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void goToChatDetail() {
+        //Check xem đăng nhập chưa
+        if (auth.getCurrentUser() == null) {
+            Intent loginIntent = new Intent(DetailActivity.this, DangNhapActivity.class);
+            startActivity(loginIntent);
+        }
+        else {
+            //Lấy ID user đang đăng nhập -> Chặn việc tự nhắn chính mình
+            String currentUserID = auth.getCurrentUser().getUid();
+            String chatID;
+
+            if (sellerID.equals(currentUserID)) {
+                Toast.makeText(this, "Không thể tự nhắn chính mình", Toast.LENGTH_SHORT).show();
+            } else {
+
+                //Tạo chatID
+                if (currentUserID.compareTo(sellerID) < 0) {
+                    chatID = currentUserID + "_" + sellerID;
+                } else {
+                    chatID = sellerID + "_" + currentUserID;
+                }
+
+                Intent intent = new Intent(DetailActivity.this, ChatDetailActivity.class);
+                intent.putExtra("sellerID", sellerID);
+                intent.putExtra("senderID", currentUserID);
+                intent.putExtra("productID", productID);
+                intent.putExtra("chatID", chatID);
+                startActivity(intent);
+            }
+        }
     }
 }

@@ -82,6 +82,20 @@
             android:layout_height="30dp"
             android:background="@drawable/ic_report"
             />
+        <ImageView
+            android:id="@+id/detailEdit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_edit"
+            />
+        <ImageView
+            android:id="@+id/detailDelete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_delete"
+            />
       </LinearLayout>
       <TextView
           android:id="@+id/detailPrice"
@@ -107,6 +121,7 @@
           android:text="Địa điểm: Tp Hồ chí Minh"
           />
       <LinearLayout
+          android:id="@+id/detailSellerInfo"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@drawable/style_double_border_background"

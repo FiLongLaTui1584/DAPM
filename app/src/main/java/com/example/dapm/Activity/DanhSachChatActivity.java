@@ -36,20 +36,6 @@ public class DanhSachChatActivity extends AppCompatActivity {
         // Initialize data
         chatList = new ArrayList<>();
         chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
 
         // Set up adapter
         chatAdapter = new DSChatAdapter(chatList);

@@ -106,13 +106,13 @@
                     android:paddingHorizontal="30dp"
                     android:background="@color/white"/>
             </LinearLayout>
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                &lt;!&ndash;<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
@@ -144,8 +144,8 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="16dp"
                     android:paddingHorizontal="30dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
+                    android:background="@color/white"/>&ndash;&gt;
+            </LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,12 +178,13 @@
                         android:textColor="#209BDD"
                         android:textSize="13sp" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:background="@color/white"
+                    android:padding="8dp"
                     android:scrollbars="vertical"
                     tools:listitem="@layout/item_product" />
             </LinearLayout>

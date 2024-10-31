@@ -70,6 +70,7 @@ public class DangBanFragment extends Fragment {
                     productList.clear();
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String productID = document.getId();
                         String productImage1 = document.getString("productImage1");
                         String productImage2 = document.getString("productImage2");
                         String productImage3 = document.getString("productImage3");
@@ -83,7 +84,7 @@ public class DangBanFragment extends Fragment {
                         String productHDSD = document.getString("productHDSD");
 
                         Product product = new Product(
-                                productImage1, productImage2, productImage3, title, price, location,
+                                productID, productImage1, productImage2, productImage3, title, price, location,
                                 productDescription, productTinhTrang, productBaoHanh, productXuatXu,
                                 productHDSD, sellerID
                         );

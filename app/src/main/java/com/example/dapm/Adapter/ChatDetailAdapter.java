@@ -1,59 +1,57 @@
 package com.example.dapm.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.dapm.R;
 import com.example.dapm.model.ChatMessage;
+import com.example.dapm.R;
+import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-
-public class ChatDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int VIEW_TYPE_SENT = 1;
-    private static final int VIEW_TYPE_RECEIVED = 2;
-
+public class ChatDetailAdapter extends RecyclerView.Adapter<ChatDetailAdapter.ChatViewHolder> {
     private List<ChatMessage> chatMessages;
+    private String senderID;
+    private Context context;
 
-    public ChatDetailAdapter(List<ChatMessage> chatMessages) {
+    public ChatDetailAdapter(List<ChatMessage> chatMessages, Context context, String senderID) {
         this.chatMessages = chatMessages;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        ChatMessage chatMessage = chatMessages.get(position);
-        if (chatMessage.isSent()) {
-            return VIEW_TYPE_SENT;
-        } else {
-            return VIEW_TYPE_RECEIVED;
-        }
+        this.context = context;
+        this.senderID = senderID;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_SENT) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tin_gui, parent, false);
-            return new SentMessageViewHolder(view);
-        } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tin_nhan, parent, false);
-            return new ReceivedMessageViewHolder(view);
-        }
+    public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_chat_message, parent, false);
+        return new ChatViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ChatMessage chatMessage = chatMessages.get(position);
-        if (holder instanceof SentMessageViewHolder) {
-            ((SentMessageViewHolder) holder).bind(chatMessage);
-        } else if (holder instanceof ReceivedMessageViewHolder) {
-            ((ReceivedMessageViewHolder) holder).bind(chatMessage);
+    public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
+        ChatMessage message = chatMessages.get(position);
+
+        // Hiển thị nội dung tin nhắn
+        holder.messageTextView.setText(message.getMessageContent());
+
+        // Hiển thị thời gian
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+        holder.timeTextView.setText(dateFormat.format(message.getTimestamp()));
+
+        // Điều chỉnh hiển thị dựa trên người gửi
+        if (message.getSenderID().equals(senderID)) {
+            // Tin nhắn gửi
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            holder.messageTextView.setBackgroundResource(R.drawable.style_button_yellow);
+        } else {
+            // Tin nhắn nhận
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            holder.messageTextView.setBackgroundResource(R.drawable.style_button_grey);
         }
     }
 
@@ -62,31 +60,14 @@ public class ChatDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return chatMessages.size();
     }
 
-    // ViewHolder cho tin nhắn gửi
-    class SentMessageViewHolder extends RecyclerView.ViewHolder {
+    static class ChatViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
+        TextView timeTextView;
 
-        public SentMessageViewHolder(View itemView) {
+        public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            messageTextView = itemView.findViewById(R.id.tin_gui);
-        }
-
-        void bind(ChatMessage chatMessage) {
-            messageTextView.setText(chatMessage.getMessage());
-        }
-    }
-
-    // ViewHolder cho tin nhắn nhận
-    class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
-
-        public ReceivedMessageViewHolder(View itemView) {
-            super(itemView);
-            messageTextView = itemView.findViewById(R.id.tin_nhan);
-        }
-
-        void bind(ChatMessage chatMessage) {
-            messageTextView.setText(chatMessage.getMessage());
+            messageTextView = itemView.findViewById(R.id.messageTextView);
+            timeTextView = itemView.findViewById(R.id.timeTextView);
         }
     }
 }

@@ -1,10 +1,13 @@
 package com.example.dapm.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -27,6 +31,7 @@ public class XemProfileUserKhacActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    private LinearLayout chatButton;
     private ImageView userAvatar, cancel;
     private TextView userName;
     private TextView userDescription;
@@ -62,9 +67,6 @@ public class XemProfileUserKhacActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-
-
-
     private void addEvent() {
         reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,11 +74,45 @@ public class XemProfileUserKhacActivity extends AppCompatActivity {
                 showReportBottomSheet();
             }
         });
+
         cancel.setOnClickListener(v -> finish());
+
+        chatButton.setOnClickListener(v -> {
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String chatID;
+
+            //Check xem đăng nhập chưa
+            if (auth.getCurrentUser() == null) {
+                Intent loginIntent = new Intent(XemProfileUserKhacActivity.this, DangNhapActivity.class);
+                startActivity(loginIntent);
+            } else {
+                String currentUserID = auth.getCurrentUser().getUid();
+
+                //Tạo chatID
+                if (currentUserID.compareTo(sellerID) < 0) {
+                    chatID = currentUserID + "_" + sellerID;
+                } else {
+                    chatID = sellerID + "_" + currentUserID;
+                }
+
+                //Lấy ID user đang đăng nhập -> Chặn việc tự nhắn chính mình
+                if (sellerID.equals(currentUserID)) {
+                    Toast.makeText(this, "Không thể tự nhắn chính mình", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(XemProfileUserKhacActivity.this, ChatDetailActivity.class);
+                    intent.putExtra("sellerID", sellerID);
+                    intent.putExtra("senderID", currentUserID);
+                    intent.putExtra("chatID", chatID);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     private void addControl() {
         reportButton = findViewById(R.id.reportButton1);
+        chatButton = findViewById(R.id.chatButton);
         tabLayout = findViewById(R.id.tab_layout_profile);
         viewPager = findViewById(R.id.view_pager_profile);
         userAvatar = findViewById(R.id.userAvatar);

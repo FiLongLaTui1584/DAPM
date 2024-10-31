@@ -35,10 +35,8 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private RecyclerView recyclerViewCategories, recyclerViewDiscounts, recyclerViewProducts;
     private CategoryAdapter categoryAdapter;
-    private DiscountAdapter discountAdapter;
     private ProductAdapter productAdapter;
     private List<Category> categoryList;
-    private List<Discount> discountList;
     private List<Product> productList;
     private ImageButton imgChat;
 
@@ -51,7 +49,7 @@ public class HomeFragment extends Fragment {
         addIntent();
 
         setupCategoriesRecyclerView(view);
-        setupDiscountsRecyclerView(view);
+        /*setupDiscountsRecyclerView(view);*/
         setupProductRecyclerView(view);
 
         return view;
@@ -70,21 +68,6 @@ public class HomeFragment extends Fragment {
         }
         categoryAdapter = new CategoryAdapter(categoryList);
         recyclerViewCategories.setAdapter(categoryAdapter);
-    }
-
-    private void setupDiscountsRecyclerView(View view) {
-        recyclerViewDiscounts = view.findViewById(R.id.recyclerViewDiscount);
-        StaggeredGridLayoutManager staggeredGridLayoutManagerDiscounts = new StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.HORIZONTAL
-        );
-        recyclerViewDiscounts.setLayoutManager(staggeredGridLayoutManagerDiscounts);
-
-        discountList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            discountList.add(new Discount(R.drawable.sample_image));
-        }
-        discountAdapter = new DiscountAdapter(discountList);
-        recyclerViewDiscounts.setAdapter(discountAdapter);
     }
 
     private void setupProductRecyclerView(View view) {
@@ -110,6 +93,7 @@ public class HomeFragment extends Fragment {
                     productList.clear();
 
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        String productID = document.getId(); // Lấy productID từ DocumentSnapshot
                         String productImage1 = document.getString("productImage1");
                         String productImage2 = document.getString("productImage2");
                         String productImage3 = document.getString("productImage3");
@@ -124,7 +108,7 @@ public class HomeFragment extends Fragment {
                         String sellerID = document.getString("sellerID");
 
                         Product product = new Product(
-                                productImage1, productImage2, productImage3, title, price, location,
+                                productID, productImage1, productImage2, productImage3, title, price, location,
                                 productDescription, productTinhTrang, productBaoHanh, productXuatXu,
                                 productHDSD, sellerID
                         );

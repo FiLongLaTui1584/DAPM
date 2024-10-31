@@ -1,6 +1,7 @@
 package com.example.dapm.model;
 
 public class Product {
+    private String productID;
     private String productImage1;
     private String productImage2;
     private String productImage3;
@@ -16,9 +17,10 @@ public class Product {
 
     public Product() {}
 
-    public Product(String productImage1, String productImage2, String productImage3, String title, int price, String location,
+    public Product(String productID, String productImage1, String productImage2, String productImage3, String title, int price, String location,
                    String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu,
                    String productHDSD, String sellerID) {
+        this.productID = productID;
         this.productImage1 = productImage1;
         this.productImage2 = productImage2;
         this.productImage3 = productImage3;
@@ -31,6 +33,14 @@ public class Product {
         this.productXuatXu = productXuatXu;
         this.productHDSD = productHDSD;
         this.sellerID = sellerID;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
     public String getProductImage1() {
