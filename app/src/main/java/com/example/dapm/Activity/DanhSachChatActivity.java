@@ -3,53 +3,86 @@ package com.example.dapm.Activity;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dapm.Adapter.DSChatAdapter;
-import com.example.dapm.model.DSChat;
+import com.example.dapm.Adapter.ChatListAdapter;
 import com.example.dapm.R;
+import com.example.dapm.model.ChatItem;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DanhSachChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private DSChatAdapter chatAdapter;
-    private List<DSChat> chatList;
-    private ImageButton btnBack;
+    private ChatListAdapter chatListAdapter;
+    private List<ChatItem> chatItems;
+    private FirebaseFirestore db;
+    private ImageButton cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_danh_sach_chat);
 
-        addControl();
-        addIntent();
+        cancel=findViewById(R.id.cancel);
+        cancel.setOnClickListener(v -> finish());
 
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerViewDSChat);
-
-        // Initialize data
-        chatList = new ArrayList<>();
-        chatList.add(new DSChat("Chó", "Gâu gâu gâu gâu", R.drawable.sample_image));
-
-        // Set up adapter
-        chatAdapter = new DSChatAdapter(chatList);
-
-        // Set LayoutManager and Adapter to RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewChatList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(chatAdapter);
+
+        chatItems = new ArrayList<>();
+        chatListAdapter = new ChatListAdapter(chatItems, this);
+        recyclerView.setAdapter(chatListAdapter);
+
+        db = FirebaseFirestore.getInstance();
+
+        loadChatList();
     }
 
-    private void addIntent() {
-        btnBack.setOnClickListener(v -> finish());
-    }
+    private void loadChatList() {
+        String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    private void addControl() {
-        btnBack = findViewById(R.id.btnBack);
+        db.collection("chats")
+                .whereArrayContains("participants", currentUserID)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    chatItems.clear();
+                    for (QueryDocumentSnapshot document : querySnapshot) {
+                        List<String> participants = (List<String>) document.get("participants");
+                        String otherUserID = participants.get(0).equals(currentUserID) ? participants.get(1) : participants.get(0);
+
+                        String lastMessage = document.getString("lastMessage");
+                        Date lastMessageTimestamp = document.getDate("lastMessageTimestamp");
+
+                        // Lấy thông tin người dùng khác
+                        db.collection("users").document(otherUserID).get()
+                                .addOnSuccessListener(userDoc -> {
+                                    if (userDoc.exists()) {
+                                        String otherUserName = userDoc.getString("name");
+                                        String otherUserAvatar = userDoc.getString("avatar");
+
+                                        // Tạo ChatItem và thêm vào danh sách
+                                        ChatItem chatItem = new ChatItem();
+                                        chatItem.setOtherUserID(otherUserID);
+                                        chatItem.setOtherUserName(otherUserName);
+                                        chatItem.setOtherUserAvatar(otherUserAvatar);
+                                        chatItem.setLastMessage(lastMessage);
+                                        chatItem.setLastMessageTimestamp(lastMessageTimestamp);
+
+                                        chatItems.add(chatItem);
+                                        chatListAdapter.notifyDataSetChanged();
+                                    }
+                                });
+                    }
+                });
     }
 }
+

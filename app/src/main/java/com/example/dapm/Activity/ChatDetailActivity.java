@@ -164,7 +164,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
     private void sendMessage(String messageContent) {
-
         String sellerID = getIntent().getStringExtra("sellerID");
         String senderID = getIntent().getStringExtra("senderID");
         String chatID = getIntent().getStringExtra("chatID");
@@ -180,21 +179,24 @@ public class ChatDetailActivity extends AppCompatActivity {
                     chatInput.setText("");
 
                     // Cập nhật nội dung và thời gian của tin nhắn cuối cùng
-                    Map<String, Object> lastMessageUpdate = new HashMap<>();
-                    lastMessageUpdate.put("lastMessage", messageContent); // Nội dung tin nhắn cuối
-                    lastMessageUpdate.put("lastMessageTimestamp", FieldValue.serverTimestamp()); // Thời gian của tin nhắn cuối
+                    Map<String, Object> chatData = new HashMap<>();
+                    chatData.put("lastMessage", messageContent);
+                    chatData.put("lastMessageTimestamp", FieldValue.serverTimestamp());
+                    chatData.put("sellerID", sellerID);
+                    chatData.put("userID", senderID);
+                    chatData.put("participants", List.of(senderID, sellerID));
 
-                    // Sử dụng `set` với `SetOptions.merge()` để đảm bảo các trường được tạo mới nếu chưa tồn tại
+
                     db.collection("chats").document(chatID)
-                            .set(lastMessageUpdate, SetOptions.merge())
-                            .addOnSuccessListener(aVoid -> Log.d("Chat", "Last message updated"))
-                            .addOnFailureListener(e -> Log.e("Chat", "Error updating last message", e));
+                            .set(chatData, SetOptions.merge())
+                            .addOnSuccessListener(aVoid -> Log.d("Chat", "Chat document updated with last message and participants"))
+                            .addOnFailureListener(e -> Log.e("Chat", "Error updating chat document", e));
                 })
                 .addOnFailureListener(e -> {
-                    // Xử lý lỗi khi gửi tin nhắn
                     Log.e("Chat", "Error sending message", e);
                 });
     }
+
 
 
 }

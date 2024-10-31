@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.dapm.Activity.DangNhapActivity;
 import com.example.dapm.Activity.DanhSachChatActivity;
+import com.example.dapm.Activity.DetailActivity;
 import com.example.dapm.Adapter.CategoryAdapter;
 import com.example.dapm.Adapter.DiscountAdapter;
 import com.example.dapm.Adapter.ProductAdapter;
@@ -22,6 +24,7 @@ import com.example.dapm.R;
 import com.example.dapm.model.Category;
 import com.example.dapm.model.Discount;
 import com.example.dapm.model.Product;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +42,8 @@ public class HomeFragment extends Fragment {
     private List<Category> categoryList;
     private List<Product> productList;
     private ImageButton imgChat;
+    private FirebaseAuth auth;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
