@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.FragmentQLTD.ChoDuyetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTinDang"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />-->
+
+    <Button
+        android:id="@+id/addTinDangButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="102dp"
+        android:text="Thêm mới" />
 
 </FrameLayout>

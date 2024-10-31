@@ -1,14 +1,22 @@
 package com.example.dapm.Activity;
 
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -23,10 +31,14 @@ import com.example.dapm.Fragment.HomeFragment;
 import com.example.dapm.Fragment.TinDangFragment;
 import com.example.dapm.R;
 import com.example.dapm.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    Uri uri;
+    FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,21 @@ public class MainActivity extends AppCompatActivity {
                 showBottomDialog();
             }
         });
+
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode() == Activity.RESULT_OK){
+                            Intent data = result.getData();
+                            uri =data.getData();
+
+                    }
+                }
+    }
+        );
     }
 
 
@@ -75,21 +102,15 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheetlayout);
 
-/*
+        /*
         LinearLayout videoLayout = dialog.findViewById(R.id.layoutVideo);
-*/
-        LinearLayout inputImg = dialog.findViewById(R.id.inputImg);
-        LinearLayout layoutChinhSach = dialog.findViewById(R.id.layoutChinhSach);
-        LinearLayout layoutXuatXu = dialog.findViewById(R.id.layoutXuatXu);
-        LinearLayout layoutHDSD = dialog.findViewById(R.id.layoutHDSD);
-        LinearLayout layoutTitle = dialog.findViewById(R.id.layoutTitle);
-        LinearLayout layoutDescrip = dialog.findViewById(R.id.layoutDescrip);
-        LinearLayout layoutBtn = dialog.findViewById(R.id.layoutBtn);
+        */
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 dialog.dismiss();
             }
         });
@@ -102,5 +123,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    
+
 }

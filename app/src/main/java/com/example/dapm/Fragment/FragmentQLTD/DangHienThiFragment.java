@@ -47,8 +47,6 @@ public class DangHienThiFragment extends Fragment {
 
 
     private void loadData() {
-        arr_TinDang.add(new TinDang(1, "New", "Warranty", "Vietnam", "Instructions", "Title 1", "Detailed description 1", "100", R.drawable.def));
-        arr_TinDang.add(new TinDang(2, "Used", "No Warranty", "USA", "Instructions", "Title 2", "Detailed description 2", "200", R.drawable.def2));
 
         tinDangAdapter.notifyDataSetChanged();
     }
