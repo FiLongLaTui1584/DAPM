@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:text="Quản lí người dùng"
+                        android:text="Quản lí giao dịch"
                         />
                     <ImageView
                         android:id="@+id/rlv6zmb7c2k"

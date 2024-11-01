@@ -58,8 +58,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
+                    <ImageView
+                        android:id="@+id/uploadImage1"
+                        android:src="@drawable/baseline_image_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onSelectImage1"/>
 
                     <ImageView
+                        android:id="@+id/uploadImage2"
+                        android:src="@drawable/baseline_image_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onSelectImage2"/>
+
+                    <ImageView
+                        android:id="@+id/uploadImage3"
+                        android:src="@drawable/baseline_image_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onSelectImage3"/>
+
+
+                    <!--<ImageView
                         android:id="@+id/uploadImage1"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -97,7 +118,7 @@
                         android:focusable="true"
                         android:onClick="onSelectImage3"
                         android:layout_marginBottom="10dp"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"/>-->
 
                 </LinearLayout>
 

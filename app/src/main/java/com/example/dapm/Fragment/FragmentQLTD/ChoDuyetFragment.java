@@ -36,12 +36,10 @@
     public class ChoDuyetFragment extends Fragment {
 
 
-        private static final int REQUEST_IMAGE_1 = 1;
-        private static final int REQUEST_IMAGE_2 = 2;
-        private static final int REQUEST_IMAGE_3 = 3;
 
 
-        private ImageView etProductImage1, etProductImage2, etProductImage3;
+
+        public ImageView etProductImage1, etProductImage2, etProductImage3;
         private Uri selectedImageUri1, selectedImageUri2, selectedImageUri3;
         private FirebaseFirestore db;
 
@@ -61,6 +59,8 @@
             db = FirebaseFirestore.getInstance();
             tinDangCollectionRef = db.collection("products");
 
+            // Initialize ImageView variables
+
             // Button to trigger BottomSheetDialog
             Button addTinDangButton = view.findViewById(R.id.addTinDangButton);
             addTinDangButton.setOnClickListener(v -> showBottomSheetDialog(null));
@@ -68,42 +68,19 @@
             recyclerView = view.findViewById(R.id.recyclerTinDang);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             arr_TinDang = new ArrayList<>();
-            adapter = new TinDangAdapter(getActivity(),arr_TinDang);
+            adapter = new TinDangAdapter(getActivity(), arr_TinDang);
             recyclerView.setAdapter(adapter);
 
+            // Set click listeners for each ImageView
 
-            // Set click listeners for each image
-            etProductImage1.setOnClickListener(v -> openImageSelector(REQUEST_IMAGE_1));
-            etProductImage2.setOnClickListener(v -> openImageSelector(REQUEST_IMAGE_2));
-            etProductImage3.setOnClickListener(v -> openImageSelector(REQUEST_IMAGE_3));
-            // Lấy dữ liệu từ Firestore
+
+            // Fetch data from Firestore
             FirestoreHelper firestoreHelper = new FirestoreHelper();
             firestoreHelper.getTinDang(arr_TinDang, adapter);
 
             return view;
         }
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (resultCode == Activity.RESULT_OK && data != null) {
-                Uri selectedImageUri = data.getData(); // Lấy Uri của ảnh đã chọn
 
-                // Cập nhật Uri dựa trên mã yêu cầu
-                switch (requestCode) {
-                    case REQUEST_IMAGE_1:
-                        selectedImageUri1 = selectedImageUri;
-                        etProductImage1.setImageURI(selectedImageUri1); // Cập nhật ImageView với ảnh đã chọn
-                        break;
-                    case REQUEST_IMAGE_2:
-                        selectedImageUri2 = selectedImageUri;
-                        etProductImage2.setImageURI(selectedImageUri2);
-                        break;
-                    case REQUEST_IMAGE_3:
-                        selectedImageUri3 = selectedImageUri;
-                        etProductImage3.setImageURI(selectedImageUri3);
-                        break;
-                }
-            }
-        }
         private void showBottomSheetDialog(TinDang existingTinDang) {
 
             bottomSheetDialog = new BottomSheetDialog(requireContext());
@@ -111,9 +88,7 @@
             bottomSheetDialog.setContentView(bottomSheetView);
 
             // Initialize Fields
-            EditText etProductImage1 = bottomSheetView.findViewById(R.id.uploadImage1);
-            EditText etProductImage2 = bottomSheetView.findViewById(R.id.uploadImage2);
-            EditText etProductImage3 = bottomSheetView.findViewById(R.id.uploadImage3);
+
             EditText etProductTitle = bottomSheetView.findViewById(R.id.uploadTopic);
             EditText etProductPrice = bottomSheetView.findViewById(R.id.uploadLang);
             EditText etProductLocation = bottomSheetView.findViewById(R.id.uploadLocation);
@@ -129,9 +104,6 @@
 
             // Nếu có tin đăng đã tồn tại, hiển thị các giá trị hiện tại trong các trường đầu vào
             if (existingTinDang != null) {
-                etProductImage1.setText(existingTinDang.getProductImage1());
-                etProductImage2.setText(existingTinDang.getProductImage2());
-                etProductImage3.setText(existingTinDang.getProductImage3());
                 etProductTitle.setText(existingTinDang.getProductTitle());
                 etProductPrice.setText(String.valueOf(existingTinDang.getProductPrice()));
                 etProductLocation.setText(existingTinDang.getProductLocation());
@@ -145,9 +117,9 @@
             // Save Button
             Button saveButton = bottomSheetView.findViewById(R.id.saveButton);
             saveButton.setOnClickListener(v -> {
-                String productImage1 = etProductImage1.getText().toString();
-                String productImage2 = etProductImage2.getText().toString();
-                String productImage3 = etProductImage3.getText().toString();
+                String productImage1 = String.valueOf(etProductImage1.getTextDirection());
+                String productImage2 = String.valueOf(etProductImage2.getTextDirection());
+                String productImage3 = String.valueOf(etProductImage3.getTextDirection());
                 String productTitle = etProductTitle.getText().toString();
 
                 int productPrice;
