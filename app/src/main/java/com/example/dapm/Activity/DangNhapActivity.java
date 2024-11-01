@@ -14,6 +14,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dapm.Activity.ADMIN.AdminActivity;
+import com.example.dapm.Fragment.HomeFragment;
 import com.example.dapm.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -128,8 +129,7 @@ public class DangNhapActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
 
-                Long IsAdmin = documentSnapshot.getLong("IsAdmin");
-                if (IsAdmin != null && IsAdmin == 1) {
+                Long IsAdmin = documentSnapshot.getLong("IsAdmin");if (IsAdmin != null && IsAdmin == 1) {
                     Toast.makeText(DangNhapActivity.this, "Admin đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     finish();
@@ -138,6 +138,7 @@ public class DangNhapActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
+
             }
         }).addOnFailureListener(e -> {
             Toast.makeText(DangNhapActivity.this, "Lỗi truy vấn quyền người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show();

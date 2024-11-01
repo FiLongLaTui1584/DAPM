@@ -71,20 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode() == Activity.RESULT_OK){
-                            Intent data = result.getData();
-                            uri =data.getData();
-
-                    }
-                }
-    }
-        );
     }
 
 

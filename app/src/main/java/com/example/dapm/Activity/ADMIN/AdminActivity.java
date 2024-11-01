@@ -37,6 +37,7 @@ public class AdminActivity extends AppCompatActivity {
         fmTran.commit();
     }
     private void addEvents() {
+        loadFragment(new HomeFragment());
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
