@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewImages.setAdapter(imageAdapter);
 
         addImagesButton.setOnClickListener(v -> openGallery());
-        cancel.setOnClickListener(v -> finish());
 
         saveButton.setOnClickListener(v -> {
             String title = titleInput.getText().toString();

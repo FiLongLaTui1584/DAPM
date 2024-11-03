@@ -255,11 +255,21 @@ public class DetailActivity extends AppCompatActivity {
                 int selectedReasonId = radioGroupReasons.getCheckedRadioButtonId();
                 RadioButton selectedReason = bottomSheetView.findViewById(selectedReasonId);
                 String reason = selectedReason != null ? selectedReason.getText().toString() : "";
-                int userPhone = Integer.parseInt(editTextPhoneNumber.getText().toString().trim());
-                String userEmail = editTextEmail.getText().toString().trim();
+
+                String phoneInput = editTextPhoneNumber.getText().toString().trim();
+                String emailInput = editTextEmail.getText().toString().trim();
+
+                // Kiểm tra xem số điện thoại và email có được nhập đầy đủ không
+                if (phoneInput.isEmpty() || emailInput.isEmpty()) {
+                    Toast.makeText(DetailActivity.this, "Vui lòng nhập đầy đủ số điện thoại và email.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Chuyển đổi số điện thoại từ String sang int
+                int userPhone = Integer.parseInt(phoneInput);
 
                 // Tạo một đối tượng ReportSP
-                ReportSP report = new ReportSP(productID, reason, userPhone, userEmail);
+                ReportSP report = new ReportSP(productID, reason, userPhone, emailInput);
 
                 // Gọi phương thức lưu báo cáo
                 submitReport(report);
@@ -282,6 +292,7 @@ public class DetailActivity extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(DetailActivity.this, "Gửi báo cáo thất bại", Toast.LENGTH_SHORT).show());
     }
+
 
     private void setupViewStoreButton() {
         detailViewStoreButton.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.example.dapm.Activity.ADMIN.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,8 +67,16 @@ public class BiToCaoSpFragment extends Fragment implements ReportAdapter.OnBlock
 
     @Override
     public void onBlockProduct(ReportSP report) {
-        // Xử lý khi admin quyết định khóa sản phẩm
-        lockProduct(report.getProductID());
+        // Hiển thị AlertDialog để xác nhận việc khóa sản phẩm
+        new AlertDialog.Builder(getContext())
+                .setTitle("Xác nhận khóa sản phẩm")
+                .setMessage("Bạn có chắc chắn muốn khóa sản phẩm này?")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    // Nếu người dùng chọn OK, tiến hành khóa sản phẩm
+                    lockProduct(report.getProductID());
+                })
+                .setNegativeButton("Hủy", null) // Không làm gì nếu người dùng chọn Hủy
+                .show();
     }
 
     private void lockProduct(String productId) {
@@ -83,4 +92,5 @@ public class BiToCaoSpFragment extends Fragment implements ReportAdapter.OnBlock
                     }
                 });
     }
+
 }

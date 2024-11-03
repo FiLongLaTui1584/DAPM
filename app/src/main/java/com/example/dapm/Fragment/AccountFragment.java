@@ -1,5 +1,6 @@
 package com.example.dapm.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,10 +59,18 @@ public class AccountFragment extends Fragment {
         });
 
         changeAccount.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // Đăng xuất tài khoản hiện tại
-            Intent intent = new Intent(getActivity(), DangNhapActivity.class);
-            startActivity(intent);
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Xác nhận đổi tài khoản")
+                    .setMessage("Bạn có chắc chắn muốn đổi tài khoản?")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut(); // Đăng xuất tài khoản hiện tại
+                        Intent intent = new Intent(getActivity(), DangNhapActivity.class);
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("Hủy", null) // Không làm gì nếu người dùng chọn Hủy
+                    .show();
         });
+
 
         editAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ChinhSuaTTCaNhanActivity.class);
@@ -69,10 +78,18 @@ public class AccountFragment extends Fragment {
         });
 
         dangXuat.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // Đăng xuất
-            layoutLoggedOut.setVisibility(View.VISIBLE); // Hiện layout_logged_out
-            layoutLoggedIn.setVisibility(View.GONE); // Ẩn layout_logged_in
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Xác nhận đăng xuất")
+                    .setMessage("Bạn có chắc chắn muốn đăng xuất?")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut(); // Đăng xuất
+                        layoutLoggedOut.setVisibility(View.VISIBLE); // Hiện layout_logged_out
+                        layoutLoggedIn.setVisibility(View.GONE); // Ẩn layout_logged_in
+                    })
+                    .setNegativeButton("Hủy", null) // Không làm gì nếu người dùng chọn Hủy
+                    .show();
         });
+
 
         accountAvt.setOnClickListener(v -> openImageChooser()); // Mở trình chọn ảnh
     }
