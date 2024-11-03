@@ -14,12 +14,13 @@ public class Product {
     private String productXuatXu;
     private String productHDSD;
     private String sellerID;
+    private String isApproved;
 
     public Product() {}
 
     public Product(String productID, String productImage1, String productImage2, String productImage3, String title, int price, String location,
                    String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu,
-                   String productHDSD, String sellerID) {
+                   String productHDSD, String sellerID, String isApproved) {
         this.productID = productID;
         this.productImage1 = productImage1;
         this.productImage2 = productImage2;
@@ -33,6 +34,7 @@ public class Product {
         this.productXuatXu = productXuatXu;
         this.productHDSD = productHDSD;
         this.sellerID = sellerID;
+        this.isApproved= isApproved;
     }
 
     public String getProductID() {
@@ -137,5 +139,13 @@ public class Product {
 
     public void setSellerID(String sellerID) {
         this.sellerID = sellerID;
+    }
+
+    public String getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
     }
 }

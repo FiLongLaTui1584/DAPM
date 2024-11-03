@@ -3,9 +3,13 @@ package com.example.dapm.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dapm.Adapter.ImageAdapter;
 import com.example.dapm.R;
+import com.example.dapm.model.ReportSP;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -34,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageButton reportButton;
     private ImageView cancel, detailSellerAvatar, detailEdit, detailDelete, detailFavButton;
     private String sellerID, productID;
-    private LinearLayout detailViewStoreButton, detailChatButton, detailSellerInfo;
+    private LinearLayout detailViewStoreButton, detailChatButton, detailSellerInfo,approveButton, rejectButton;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
@@ -71,6 +76,20 @@ public class DetailActivity extends AppCompatActivity {
                 goToChatDetail();
             }
         });
+
+        approveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProductApprovalStatus("approved");
+            }
+        });
+
+        rejectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProductApprovalStatus("rejected");
+            }
+        });
     }
 
     private void addControl() {
@@ -93,6 +112,8 @@ public class DetailActivity extends AppCompatActivity {
         detailEdit = findViewById(R.id.detailEdit);
         detailSellerInfo= findViewById(R.id.detailSellerInfo);
         detailFavButton= findViewById(R.id.detailFavButton);
+        approveButton = findViewById(R.id.approveButton);
+        rejectButton = findViewById(R.id.rejectButton);
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -155,32 +176,56 @@ public class DetailActivity extends AppCompatActivity {
                                 if (auth.getCurrentUser() != null) {
                                     String currentUserID = auth.getCurrentUser().getUid();
 
-                                    // Diều chỉnh giao diện nếu seller xem sản phẩm của mình
-                                    if (sellerID.equals(currentUserID)) {
-                                        detailEdit.setVisibility(View.VISIBLE);
-                                        detailDelete.setVisibility(View.VISIBLE);
+                                    // Gọi Firestore để lấy thông tin người dùng hiện tại
+                                    db.collection("users").document(currentUserID)
+                                            .get()
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot userDocumentSnapshot) {
+                                                    if (userDocumentSnapshot.exists()) {
+                                                        // Lấy isAdmin của người dùng hiện tại
+                                                        int isAdmin = userDocumentSnapshot.getLong("IsAdmin") != null ? userDocumentSnapshot.getLong("IsAdmin").intValue() : 0;
 
-                                        detailFavButton.setVisibility(View.GONE);
-                                        reportButton.setVisibility(View.GONE);
-                                        detailSellerInfo.setVisibility(View.GONE);
-                                    } else {
-                                        // Điều chỉnh giao diện cho user thường
-                                        detailFavButton.setVisibility(View.VISIBLE);
-                                        reportButton.setVisibility(View.VISIBLE);
-                                        detailSellerInfo.setVisibility(View.VISIBLE);
-
-
-                                        detailEdit.setVisibility(View.GONE);
-                                        detailDelete.setVisibility(View.GONE);
-                                    }
+                                                        // Điều chỉnh giao diện dựa trên isAdmin
+                                                        if (isAdmin == 1) {
+                                                            detailEdit.setVisibility(View.GONE);
+                                                            detailDelete.setVisibility(View.GONE);
+                                                            detailFavButton.setVisibility(View.GONE);
+                                                            reportButton.setVisibility(View.GONE);
+                                                            detailSellerInfo.setVisibility(View.VISIBLE);
+                                                            approveButton.setVisibility(View.VISIBLE);
+                                                            rejectButton.setVisibility(View.VISIBLE);
+                                                        } else if (sellerID.equals(currentUserID)) {
+                                                            // Điều chỉnh giao diện nếu seller xem sản phẩm của mình
+                                                            detailEdit.setVisibility(View.VISIBLE);
+                                                            detailDelete.setVisibility(View.VISIBLE);
+                                                            detailFavButton.setVisibility(View.GONE);
+                                                            reportButton.setVisibility(View.GONE);
+                                                            detailSellerInfo.setVisibility(View.GONE);
+                                                            approveButton.setVisibility(View.GONE);
+                                                            rejectButton.setVisibility(View.GONE);
+                                                        } else {
+                                                            // Điều chỉnh giao diện cho user thường
+                                                            detailFavButton.setVisibility(View.VISIBLE);
+                                                            reportButton.setVisibility(View.VISIBLE);
+                                                            detailSellerInfo.setVisibility(View.VISIBLE);
+                                                            detailEdit.setVisibility(View.GONE);
+                                                            detailDelete.setVisibility(View.GONE);
+                                                            approveButton.setVisibility(View.GONE);
+                                                            rejectButton.setVisibility(View.GONE);
+                                                        }
+                                                    }
+                                                }
+                                            });
                                 } else {
-                                    //Khách vãng lai
+                                    // Khách vãng lai
                                     reportButton.setVisibility(View.VISIBLE);
                                     detailSellerInfo.setVisibility(View.VISIBLE);
-
                                     detailFavButton.setVisibility(View.GONE);
                                     detailEdit.setVisibility(View.GONE);
                                     detailDelete.setVisibility(View.GONE);
+                                    approveButton.setVisibility(View.GONE);
+                                    rejectButton.setVisibility(View.GONE);
                                 }
                             }
                         }
@@ -188,25 +233,54 @@ public class DetailActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            // Xử lý lỗi
                         }
                     });
         }
     }
-
 
     private void showReportBottomSheet() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DetailActivity.this);
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bao_cao_sp, null);
         bottomSheetDialog.setContentView(bottomSheetView);
 
-        bottomSheetView.findViewById(R.id.cancelButton).setOnClickListener(new View.OnClickListener() {
+        RadioGroup radioGroupReasons = bottomSheetView.findViewById(R.id.radioGroupReasons);
+        EditText editTextPhoneNumber = bottomSheetView.findViewById(R.id.editTextPhoneNumber);
+        EditText editTextEmail = bottomSheetView.findViewById(R.id.editTextEmail);
+        Button btnSubmitReport = bottomSheetView.findViewById(R.id.btnSubmitReport);
+
+        btnSubmitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectedReasonId = radioGroupReasons.getCheckedRadioButtonId();
+                RadioButton selectedReason = bottomSheetView.findViewById(selectedReasonId);
+                String reason = selectedReason != null ? selectedReason.getText().toString() : "";
+                int userPhone = Integer.parseInt(editTextPhoneNumber.getText().toString().trim());
+                String userEmail = editTextEmail.getText().toString().trim();
+
+                // Tạo một đối tượng ReportSP
+                ReportSP report = new ReportSP(productID, reason, userPhone, userEmail);
+
+                // Gọi phương thức lưu báo cáo
+                submitReport(report);
+
+                // Đóng bottom sheet sau khi gửi
                 bottomSheetDialog.dismiss();
             }
         });
 
+        bottomSheetView.findViewById(R.id.cancelButton).setOnClickListener(v -> bottomSheetDialog.dismiss());
         bottomSheetDialog.show();
+    }
+
+    private void submitReport(ReportSP report) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("reports_sp")
+                .add(report)
+                .addOnSuccessListener(documentReference ->
+                        Toast.makeText(DetailActivity.this, "Báo cáo đã được gửi thành công", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(DetailActivity.this, "Gửi báo cáo thất bại", Toast.LENGTH_SHORT).show());
     }
 
     private void setupViewStoreButton() {
@@ -249,6 +323,28 @@ public class DetailActivity extends AppCompatActivity {
                 intent.putExtra("chatID", chatID);
                 startActivity(intent);
             }
+        }
+    }
+
+    //Hàm duyệt sản phẩm của admin
+    private void updateProductApprovalStatus(String status) {
+        if (productID != null) {
+            db.collection("products").document(productID)
+                    .update("isApproved", status)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(DetailActivity.this, "Trạng thái đã được " + status, Toast.LENGTH_SHORT).show();
+                            // Optionally, finish the activity or update the UI accordingly
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(DetailActivity.this, "Trạng thái đã lỗi", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 }

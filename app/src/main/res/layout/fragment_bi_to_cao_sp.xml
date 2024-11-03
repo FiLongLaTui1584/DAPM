@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ADMIN.fragment.DaDuyetFragment">
+    tools:context=".Activity.ADMIN.fragment.BiToCaoSpFragment"
+    android:background="@color/background_color">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDaDuyet"
+        android:id="@+id/recyclerViewReports"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        tools:listitem="@layout/item_report" />
+        />
 </FrameLayout>

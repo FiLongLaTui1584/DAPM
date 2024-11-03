@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/dialogbkg">
+    android:orientation="vertical">
 
     <!-- Thanh công cụ với nút quay lại và tiêu đề -->
     <LinearLayout
@@ -19,16 +18,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="viewStart"
-            android:text="Báo cáo sản phẩm"
+            android:text="BÁO CÁO SẢN PHẨM"
             android:textStyle="bold"
             android:padding="8dp"
-            android:textColor="@color/main_color"
+            android:textColor="@color/black"
             android:textSize="25dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_clear_24"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_cancel"
+            android:layout_gravity="center"
             android:id="@+id/cancelButton"/>
 
 
@@ -100,6 +100,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin không đúng thực tế" />
+
+        <RadioButton
+            android:id="@+id/radioIncorrectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sản phẩm có hình ảnh phản cảm" />
     </RadioGroup>
 
     <!-- Phần thông tin liên hệ -->
@@ -138,7 +144,7 @@
         android:padding="12dp"/>
 
     <!-- Nút Gửi Báo Cáo -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmitReport"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -147,6 +153,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginHorizontal="30dp"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/main_color"/>
+        android:background="@drawable/style_button_yellow"/>
 
 </LinearLayout>

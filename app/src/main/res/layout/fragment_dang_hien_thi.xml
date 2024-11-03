@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,11 +6,7 @@
     tools:context=".Fragment.FragmentQLTD.DangHienThiFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerTinDang"
+        android:id="@+id/recyclerDangHienThi"
         android:layout_width="match_parent"
-        android:layout_height="515dp" />
-
-
-
-
+        android:layout_height="match_parent"/>
 </FrameLayout>

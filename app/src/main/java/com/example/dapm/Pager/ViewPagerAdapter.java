@@ -36,22 +36,18 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return 3;
     }
 
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String title = "";
-        switch (position){
+        switch (position) {
             case 0:
-                title= "Đang hiển thị";
-                break;
+                return "Đang hiển thị";
             case 1:
-                title= "Chờ duyệt";
-                break;
+                return "Chờ duyệt";
             case 2:
-                title= "Bị từ chối";
-                break;
+                return "Bị từ chối";
+            default:
+                return null;
         }
-        return title;
     }
 }

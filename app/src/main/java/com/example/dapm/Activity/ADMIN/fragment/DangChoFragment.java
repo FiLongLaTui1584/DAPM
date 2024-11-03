@@ -1,66 +1,85 @@
 package com.example.dapm.Activity.ADMIN.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dapm.R;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DangChoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.dapm.Adapter.ProductAdapter;
+import com.example.dapm.model.Product;
+import com.example.dapm.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DangChoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DangChoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DangChoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DangChoFragment newInstance(String param1, String param2) {
-        DangChoFragment fragment = new DangChoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FirebaseFirestore db;
+    private RecyclerView recyclerView;
+    private ProductAdapter productAdapter;
+    private List<Product> productList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dang_cho, container, false);
+        addControl(view);
+        setupRecyclerView();
+        loadPendingProductsFromFirestore();
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dang_cho, container, false);
+    private void addControl(View view) {
+        recyclerView = view.findViewById(R.id.recyclerDangCho);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        productList = new ArrayList<>();
+        productAdapter = new ProductAdapter(productList);
+        recyclerView.setAdapter(productAdapter);
+    }
+
+    private void loadPendingProductsFromFirestore() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("products")
+                .whereEqualTo("isApproved", "pending") // Fetch products pending approval
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    productList.clear();
+                    for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        String productID = document.getId();
+                        String productImage1 = document.getString("productImage1");
+                        String productImage2 = document.getString("productImage2");
+                        String productImage3 = document.getString("productImage3");
+                        String title = document.getString("productTitle");
+                        int price = document.contains("productPrice") ? document.getLong("productPrice").intValue() : 0;
+                        String location = document.getString("productLocation");
+                        String productDescription = document.getString("productDescription");
+                        String productTinhTrang = document.getString("productTinhTrang");
+                        String productBaoHanh = document.getString("productBaoHanh");
+                        String productXuatXu = document.getString("productXuatXu");
+                        String productHDSD = document.getString("productHDSD");
+                        String sellerID = document.getString("sellerID");
+                        String isApproved = document.getString("isApproved");
+
+                        Product product = new Product(
+                                productID, productImage1, productImage2, productImage3, title, price, location,
+                                productDescription, productTinhTrang, productBaoHanh, productXuatXu,
+                                productHDSD, sellerID, isApproved
+                        );
+
+                        productList.add(product);
+                    }
+                    productAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> Log.e("DangChoFragment", "Error loading pending products", e));
     }
 }

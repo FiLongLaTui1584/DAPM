@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ADMIN.fragment.QuanLiTinAdminFragment">
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -15,69 +15,42 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/r1rnpaint34b"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFB909"
-                android:paddingVertical="17dp"
-                android:paddingHorizontal="21dp"
+                android:layout_height="90dp"
+                android:background="@color/main_color"
                 android:orientation="vertical">
-                <LinearLayout
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r57w2ybup9li"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="50dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/rd04xqf9xqvp"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginEnd="4dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="Quản lí tin đăng"
-                        />
-                    <ImageView
-                        android:id="@+id/rlv6zmb7c2k"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@mipmap/ic_launcher"
-                        android:scaleType="fitXY"
-                        />
-                </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="QUẢN LÍ TIN ĐĂNG" />
             </LinearLayout>
             <LinearLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/r0c31cq88amid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:background="#FFFFFF"
                 android:paddingVertical="11dp"
-                android:paddingHorizontal="25dp"
+                android:paddingHorizontal="30dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:id="@+id/rdugssvobvtd"
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
-                    android:layout_marginEnd="26dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="fitXY"
-                    />
+                    android:id="@+id/sellerAvatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/avatar_admin" />
                 <TextView
-                    android:id="@+id/rli6amlr50u"
-                    android:textColor="#3C3E40"
-                    android:textSize="14sp"
+                    android:id="@+id/sellerName"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:text="ADMIN"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="Admin"
-                    />
+                    android:layout_width="wrap_content" />
             </LinearLayout>
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout_qltindang"

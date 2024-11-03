@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.dapm.Activity.ADMIN.fragment.BiBaoCaoFragment;
 import com.example.dapm.Activity.ADMIN.fragment.BiKhoaFragment;
+import com.example.dapm.Activity.ADMIN.fragment.BiToCaoSpFragment;
 import com.example.dapm.Activity.ADMIN.fragment.BiTuChoiFragment;
 import com.example.dapm.Activity.ADMIN.fragment.DaDuyetFragment;
 import com.example.dapm.Activity.ADMIN.fragment.DangChoFragment;
@@ -28,6 +29,8 @@ public class ViewPageerQLTinAdapter extends FragmentStatePagerAdapter {
                 return new DaDuyetFragment();
             case 2:
                 return new BiTuChoiFragment();
+            case 3:
+                return new BiToCaoSpFragment();
             default:
                 return new DangChoFragment();
         }
@@ -35,7 +38,7 @@ public class ViewPageerQLTinAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
     @Nullable
     @Override
@@ -50,6 +53,9 @@ public class ViewPageerQLTinAdapter extends FragmentStatePagerAdapter {
                 break;
             case 2:
                 title= "Bị từ chối";
+                break;
+            case 3:
+                title= "Bị báo cáo";
                 break;
         }
         return title;

@@ -53,4 +53,5 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
     implementation ("com.squareup.picasso:picasso:2.8")
 
+    implementation ("com.squareup.picasso:picasso:2.8")
 }

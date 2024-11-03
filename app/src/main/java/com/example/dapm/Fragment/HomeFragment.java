@@ -93,6 +93,7 @@ public class HomeFragment extends Fragment {
 
     private void loadProductsFromFirestore() {
         db.collection("products")
+                .whereEqualTo("isApproved", "approved") // Chỉ lấy sản phẩm đã được duyệt
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     productList.clear();
@@ -111,19 +112,23 @@ public class HomeFragment extends Fragment {
                         String productXuatXu = document.getString("productXuatXu");
                         String productHDSD = document.getString("productHDSD");
                         String sellerID = document.getString("sellerID");
+                        String isApproved = document.getString("isApproved");
 
-                        Product product = new Product(
-                                productID, productImage1, productImage2, productImage3, title, price, location,
-                                productDescription, productTinhTrang, productBaoHanh, productXuatXu,
-                                productHDSD, sellerID
-                        );
-
-                        productList.add(product);
+                        // Chỉ thêm sản phẩm vào danh sách nếu đã được duyệt
+                        if ("approved".equals(isApproved)) {
+                            Product product = new Product(
+                                    productID, productImage1, productImage2, productImage3, title, price, location,
+                                    productDescription, productTinhTrang, productBaoHanh, productXuatXu,
+                                    productHDSD, sellerID, isApproved
+                            );
+                            productList.add(product);
+                        }
                     }
                     productAdapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> Log.e("HomeFragment", "Error loading products", e));
     }
+
 
 
     private void addControl(View view) {

@@ -69,6 +69,53 @@
             android:layout_weight="1"
             android:text="Hahahaha hohoho hehe"
             />
+        <LinearLayout
+            android:id="@+id/approveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/style_button_xem_cua_hang"
+            android:padding="7dp"
+            android:orientation="horizontal">
+          <ImageView
+              android:layout_width="15dp"
+              android:layout_height="15dp"
+              android:background="@drawable/ic_approve"
+              android:layout_marginEnd="5dp"
+              />
+          <TextView
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:text="Duyệt"
+              />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rejectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/style_button_xem_cua_hang"
+            android:padding="7dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+          <ImageView
+              android:layout_width="15dp"
+              android:layout_height="15dp"
+              android:background="@drawable/ic_reject"
+              android:layout_marginEnd="5dp"
+              />
+          <TextView
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:text="Từ chối"
+              />
+        </LinearLayout>
         <ImageView
             android:id="@+id/detailFavButton"
             android:layout_width="30dp"

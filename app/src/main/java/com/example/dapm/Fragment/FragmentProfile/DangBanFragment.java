@@ -65,6 +65,7 @@ public class DangBanFragment extends Fragment {
     private void loadProductsBySellerID(String sellerID) {
         db.collection("products")
                 .whereEqualTo("sellerID", sellerID)
+                .whereEqualTo("isApproved", "approved")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     productList.clear();
@@ -82,11 +83,12 @@ public class DangBanFragment extends Fragment {
                         String productBaoHanh = document.getString("productBaoHanh");
                         String productXuatXu = document.getString("productXuatXu");
                         String productHDSD = document.getString("productHDSD");
+                        String isApproved = document.getString("isApproved");
 
                         Product product = new Product(
                                 productID, productImage1, productImage2, productImage3, title, price, location,
                                 productDescription, productTinhTrang, productBaoHanh, productXuatXu,
-                                productHDSD, sellerID
+                                productHDSD, sellerID, isApproved
                         );
 
                         productList.add(product);
