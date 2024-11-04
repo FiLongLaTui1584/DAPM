@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:layout_marginBottom="50dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đăng tin mới"
+            android:text="Sửa thông tin sản phẩm"
             android:layout_weight="1"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -27,117 +28,89 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addImagesButton"
-        android:background="@drawable/style_button_yellow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:textSize="12dp"
-        android:text="Thêm ảnh" />
 
-    <!-- Image Views for Product Images -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewImages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="12dp"
-        />
-
-    <Spinner
-        android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginVertical="5dp" />
 
     <!-- EditText Fields -->
     <EditText
-        android:id="@+id/uploadTiltle"
+        android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
-        android:inputType="text"
         android:textSize="14sp"
+        android:inputType="text"
         android:hint="Tiêu đề"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadPrice"
+        android:id="@+id/editPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
-        android:inputType="number"
         android:textSize="14sp"
+        android:inputType="number"
         android:hint="Giá"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadDescription"
+        android:id="@+id/editDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
+        android:inputType="text"
         android:textSize="14sp"
         android:hint="Mô tả"
-        android:inputType="text"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadLocation"
+        android:id="@+id/editLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
+        android:inputType="text"
         android:textSize="14sp"
         android:hint="Địa chỉ"
-        android:inputType="text"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadTinhTrang"
+        android:id="@+id/editTinhTrang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
         android:inputType="text"
+        android:textSize="14sp"
         android:hint="Tình trạng"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadBaoHanh"
+        android:id="@+id/editBaoHanh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
-        android:inputType="text"
         android:textSize="14sp"
+        android:inputType="text"
         android:hint="Bảo hành"
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadXuatXu"
+        android:id="@+id/editXuatXu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
@@ -150,15 +123,15 @@
         android:layout_marginVertical="5dp" />
 
     <EditText
-        android:id="@+id/uploadHDSD"
+        android:id="@+id/editHDSD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_text"
         android:padding="16dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
         android:inputType="text"
+        android:textSize="14sp"
         android:hint="Hướng dẫn sử dụng"
         android:layout_marginVertical="5dp" />
 

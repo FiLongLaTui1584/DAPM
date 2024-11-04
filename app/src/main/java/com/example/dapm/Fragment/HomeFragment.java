@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.dapm.Activity.DangNhapActivity;
 import com.example.dapm.Activity.DanhSachChatActivity;
 import com.example.dapm.Activity.DetailActivity;
+import com.example.dapm.Activity.SearchResultsActivity;
 import com.example.dapm.Adapter.CategoryAdapter;
 import com.example.dapm.Adapter.DiscountAdapter;
 import com.example.dapm.Adapter.ProductAdapter;
@@ -36,11 +39,12 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private FirebaseFirestore db;
-    private RecyclerView recyclerViewCategories, recyclerViewDiscounts, recyclerViewProducts;
+    private RecyclerView recyclerViewCategories, recyclerViewProducts;
     private CategoryAdapter categoryAdapter;
     private ProductAdapter productAdapter;
     private List<Category> categoryList;
     private List<Product> productList;
+    private List<Product> allProducts;
     private ImageButton imgChat;
     private FirebaseAuth auth;
 
@@ -67,13 +71,29 @@ public class HomeFragment extends Fragment {
         );
         recyclerViewCategories.setLayoutManager(staggeredGridLayoutManagerCategories);
 
+        db = FirebaseFirestore.getInstance();
         categoryList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            categoryList.add(new Category("Danh mục nè", R.drawable.sample_image));
-        }
         categoryAdapter = new CategoryAdapter(categoryList);
         recyclerViewCategories.setAdapter(categoryAdapter);
+
+        db.collection("categories")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    categoryList.clear();
+                    for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        String categoryName = document.getString("categoryName");
+                        String categoryImageURL = document.getString("categoryImageURL");
+                        String categoryID = document.getId(); // Lấy ID của category
+
+                        Category category = new Category(categoryName, categoryImageURL, categoryID);
+                        categoryList.add(category);
+                    }
+                    categoryAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> Log.e("HomeFragment", "Error loading categories", e));
+
     }
+
 
     private void setupProductRecyclerView(View view) {
         db = FirebaseFirestore.getInstance();
@@ -88,7 +108,7 @@ public class HomeFragment extends Fragment {
         recyclerViewProducts.setAdapter(productAdapter);
 
         loadProductsFromFirestore(); // Tải dữ liệu từ Firestore
-
+        setupSearchFunctionality(view);
     }
 
     private void loadProductsFromFirestore() {
@@ -96,6 +116,7 @@ public class HomeFragment extends Fragment {
                 .whereEqualTo("isApproved", "approved") // Chỉ lấy sản phẩm đã được duyệt
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    allProducts = new ArrayList<>();
                     productList.clear();
 
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
@@ -112,6 +133,7 @@ public class HomeFragment extends Fragment {
                         String productXuatXu = document.getString("productXuatXu");
                         String productHDSD = document.getString("productHDSD");
                         String sellerID = document.getString("sellerID");
+                        String categoryID = document.getString("categoryID");
                         String isApproved = document.getString("isApproved");
 
                         // Chỉ thêm sản phẩm vào danh sách nếu đã được duyệt
@@ -119,8 +141,9 @@ public class HomeFragment extends Fragment {
                             Product product = new Product(
                                     productID, productImage1, productImage2, productImage3, title, price, location,
                                     productDescription, productTinhTrang, productBaoHanh, productXuatXu,
-                                    productHDSD, sellerID, isApproved
+                                    productHDSD, sellerID, categoryID, isApproved
                             );
+                            allProducts.add(product);
                             productList.add(product);
                         }
                     }
@@ -129,8 +152,6 @@ public class HomeFragment extends Fragment {
                 .addOnFailureListener(e -> Log.e("HomeFragment", "Error loading products", e));
     }
 
-
-
     private void addControl(View view) {
         imgChat = view.findViewById(R.id.HomeChat);
     }
@@ -138,6 +159,28 @@ public class HomeFragment extends Fragment {
     private void addIntent() {
         imgChat.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), DanhSachChatActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    // Thêm phương thức cho nút tìm kiếm
+    private void setupSearchFunctionality(View view) {
+        EditText editSearch = view.findViewById(R.id.edit_search);
+        ImageView searchButton = view.findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(v -> {
+            String query = editSearch.getText().toString().toLowerCase();
+            List<Product> filteredProducts = new ArrayList<>();
+
+            for (Product product : allProducts) {
+                if (product.getProductTitle().toLowerCase().contains(query)) {
+                    filteredProducts.add(product);
+                }
+            }
+
+            // Chuyển đến SearchResultsActivity với danh sách sản phẩm đã lọc
+            Intent intent = new Intent(getActivity(), SearchResultsActivity.class);
+            intent.putExtra("filteredProducts", (ArrayList<Product>) filteredProducts); // Gửi danh sách đã lọc
             startActivity(intent);
         });
     }

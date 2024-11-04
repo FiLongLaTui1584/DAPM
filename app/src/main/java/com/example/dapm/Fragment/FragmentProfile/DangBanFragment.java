@@ -83,12 +83,13 @@ public class DangBanFragment extends Fragment {
                         String productBaoHanh = document.getString("productBaoHanh");
                         String productXuatXu = document.getString("productXuatXu");
                         String productHDSD = document.getString("productHDSD");
+                        String categoryID = document.getString("categoryID");
                         String isApproved = document.getString("isApproved");
 
                         Product product = new Product(
                                 productID, productImage1, productImage2, productImage3, title, price, location,
                                 productDescription, productTinhTrang, productBaoHanh, productXuatXu,
-                                productHDSD, sellerID, isApproved
+                                productHDSD, sellerID, categoryID, isApproved
                         );
 
                         productList.add(product);

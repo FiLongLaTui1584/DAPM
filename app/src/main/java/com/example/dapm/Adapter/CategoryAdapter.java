@@ -1,22 +1,25 @@
 package com.example.dapm.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dapm.Activity.CategoryProductsActivity;
 import com.example.dapm.R;
 import com.example.dapm.model.Category;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private List<Category> categoryList;
 
-    // Constructor
     public CategoryAdapter(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
@@ -31,8 +34,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Category category = categoryList.get(position);
-        holder.categoryTitle.setText(category.getTitle());
-        holder.categoryImage.setImageResource(category.getImageResId());
+        holder.categoryTitle.setText(category.getCategoryName());
+        Picasso.get().load(category.getCategoryImageURL()).into(holder.categoryImage);
+
+        // Bắt sự kiện click
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CategoryProductsActivity.class);
+            intent.putExtra("categoryID", category.getCategoryID()); // Truyền categoryID
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -51,4 +61,3 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
     }
 }
-

@@ -67,6 +67,7 @@
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="30dp"
                 android:textColor="@color/black"
+                android:inputType="text"
                 android:textSize="14sp"
                 android:hint="Email" />
 

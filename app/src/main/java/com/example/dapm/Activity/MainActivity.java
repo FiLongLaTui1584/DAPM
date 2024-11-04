@@ -6,9 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,6 +30,7 @@ import com.example.dapm.Fragment.HomeFragment;
 import com.example.dapm.Fragment.TinDangFragment;
 import com.example.dapm.R;
 import com.example.dapm.databinding.ActivityMainBinding;
+import com.example.dapm.model.Category;
 import com.example.dapm.model.Product;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +39,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseFirestore firestore;
     private int imageUploadCount = 0;
+    private List<String> categoryNames = new ArrayList<>(); // Danh sách tên danh mục
+    private List<Category> categories = new ArrayList<>(); // Danh sách đối tượng Category
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +122,16 @@ public class MainActivity extends AppCompatActivity {
         EditText baoHanhInput = bottomSheetDialog.findViewById(R.id.uploadBaoHanh);
         EditText xuatXuInput = bottomSheetDialog.findViewById(R.id.uploadXuatXu);
         EditText hdsdInput = bottomSheetDialog.findViewById(R.id.uploadHDSD);
+        Spinner categorySpinner = bottomSheetDialog.findViewById(R.id.categorySpinner);
 
         imageAdapter = new UploadImageAdapter(selectedImages);
         recyclerViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewImages.setAdapter(imageAdapter);
 
         addImagesButton.setOnClickListener(v -> openGallery());
+
+        // Lấy danh sách danh mục và thiết lập cho Spinner
+        getCategories(categorySpinner);
 
         saveButton.setOnClickListener(v -> {
             String title = titleInput.getText().toString();
@@ -132,11 +142,21 @@ public class MainActivity extends AppCompatActivity {
             String baoHanh = baoHanhInput.getText().toString();
             String xuatXu = xuatXuInput.getText().toString();
             String hdsd = hdsdInput.getText().toString();
+            String selectedCategoryName = categorySpinner.getSelectedItem().toString(); // Lấy tên danh mục được chọn
+            String categoryID = null;
+
+            // Tìm categoryID từ danh mục được chọn
+            for (Category category : categories) {
+                if (category.getCategoryName().equals(selectedCategoryName)) {
+                    categoryID = category.getCategoryID(); // Lấy categoryID
+                    break;
+                }
+            }
 
             if (title.isEmpty() || price.isEmpty() || description.isEmpty() || location.isEmpty() || selectedImages.size() < 3) {
                 Toast.makeText(MainActivity.this, "Vui lòng nhập đủ thông tin và chọn 3 ảnh", Toast.LENGTH_SHORT).show();
             } else {
-                uploadImagesToStorage(title, Integer.parseInt(price), description, location, tinhTrang, baoHanh, xuatXu, hdsd);
+                uploadImagesToStorage(title, Integer.parseInt(price), description, location, tinhTrang, baoHanh, xuatXu, hdsd, categoryID);
                 Toast.makeText(MainActivity.this, "Sản phẩm đã được tải lên thành công", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Chờ quản trị viên duyệt sản phẩm", Toast.LENGTH_SHORT).show();
             }
@@ -170,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
     );
 
-    private void uploadImagesToStorage(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd) {
+    private void uploadImagesToStorage(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, String categoryID) {
         List<String> imageUrls = new ArrayList<>();
         for (int i = 0; i < selectedImages.size(); i++) {
             Uri imageUri = selectedImages.get(i);
@@ -182,14 +202,15 @@ public class MainActivity extends AppCompatActivity {
                         imageUploadCount++;
 
                         if (imageUploadCount == selectedImages.size()) {
-                            saveProductToFirestore(title, price, description, location, tinhTrang, baoHanh, xuatXu, hdsd, imageUrls);
+                            // Gọi phương thức lưu sản phẩm với categoryID
+                            saveProductToFirestore(title, price, description, location, tinhTrang, baoHanh, xuatXu, hdsd, imageUrls, categoryID);
                         }
                     }))
                     .addOnFailureListener(e -> Log.e("MainActivity", "Error uploading image", e));
         }
     }
 
-    private void saveProductToFirestore(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, List<String> imageUrls) {
+    private void saveProductToFirestore(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, List<String> imageUrls, String categoryID) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) return;
 
@@ -198,9 +219,13 @@ public class MainActivity extends AppCompatActivity {
         // Tạo một tài liệu mới và lấy ID tự động sinh ra
         DocumentReference productRef = firestore.collection("products").document();
 
+        // Tạo đối tượng Product và gán categoryID
         Product product = new Product(
-                productRef.getId(), imageUrls.get(0), imageUrls.get(1), imageUrls.get(2),
-                title, price, location, description, tinhTrang, baoHanh, xuatXu, hdsd, sellerID, "pending"
+                productRef.getId(),
+                imageUrls.size() > 0 ? imageUrls.get(0) : null,
+                imageUrls.size() > 1 ? imageUrls.get(1) : null,
+                imageUrls.size() > 2 ? imageUrls.get(2) : null,
+                title, price, location, description, tinhTrang, baoHanh, xuatXu, hdsd, sellerID, categoryID, "pending"
         );
 
         productRef.set(product)
@@ -218,5 +243,28 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
+    // Phương thức lấy danh sách danh mục
+    private void getCategories(Spinner categorySpinner) {
+        firestore.collection("categories")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        categories.clear(); // Xóa danh sách trước khi thêm mới
+                        List<String> categoryNames = new ArrayList<>(); // Danh sách tên cho Spinner
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Tạo đối tượng Category từ Firestore
+                            String categoryName = document.getString("categoryName");
+                            String categoryImageURL = document.getString("categoryImageURL");
+                            String categoryID = document.getId();
+                            categories.add(new Category(categoryName, categoryImageURL, categoryID));
+                            categoryNames.add(categoryName); // Thêm tên vào danh sách Spinner
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryNames);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        categorySpinner.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Lỗi khi lấy danh mục: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

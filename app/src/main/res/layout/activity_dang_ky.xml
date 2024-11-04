@@ -68,6 +68,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                android:inputType="text"
                 android:hint="Họ và tên" />
 
             <EditText

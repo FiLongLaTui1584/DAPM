@@ -1,20 +1,28 @@
 package com.example.dapm.model;
 
 public class Category {
-    private String title;
-    private int imageResId;
+    private String categoryName;
+    private String categoryImageURL;
+    private String categoryID;
 
-    public Category(String title, int imageResId) {
-        this.title = title;
-        this.imageResId = imageResId;
+    public Category() {
     }
 
-    public String getTitle() {
-        return title;
+    public Category(String categoryName, String categoryImageURL, String categoryID) {
+        this.categoryName = categoryName;
+        this.categoryImageURL = categoryImageURL;
+        this.categoryID = categoryID;
     }
 
-    public int getImageResId() {
-        return imageResId;
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getCategoryImageURL() {
+        return categoryImageURL;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
     }
 }
-

@@ -1,6 +1,8 @@
 package com.example.dapm.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String productID;
     private String productImage1;
     private String productImage2;
@@ -14,27 +16,27 @@ public class Product {
     private String productXuatXu;
     private String productHDSD;
     private String sellerID;
+    private String categoryID;
     private String isApproved;
 
     public Product() {}
 
-    public Product(String productID, String productImage1, String productImage2, String productImage3, String title, int price, String location,
-                   String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu,
-                   String productHDSD, String sellerID, String isApproved) {
+    public Product(String productID, String productImage1, String productImage2, String productImage3, String productTitle, int productPrice, String productLocation, String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu, String productHDSD, String sellerID, String categoryID, String isApproved) {
         this.productID = productID;
         this.productImage1 = productImage1;
         this.productImage2 = productImage2;
         this.productImage3 = productImage3;
-        this.productTitle = title;
-        this.productPrice = price;
-        this.productLocation = location;
+        this.productTitle = productTitle;
+        this.productPrice = productPrice;
+        this.productLocation = productLocation;
         this.productDescription = productDescription;
         this.productTinhTrang = productTinhTrang;
         this.productBaoHanh = productBaoHanh;
         this.productXuatXu = productXuatXu;
         this.productHDSD = productHDSD;
         this.sellerID = sellerID;
-        this.isApproved= isApproved;
+        this.categoryID = categoryID;
+        this.isApproved = isApproved;
     }
 
     public String getProductID() {
@@ -139,6 +141,14 @@ public class Product {
 
     public void setSellerID(String sellerID) {
         this.sellerID = sellerID;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 
     public String getIsApproved() {

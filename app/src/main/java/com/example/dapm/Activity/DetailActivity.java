@@ -1,5 +1,7 @@
 package com.example.dapm.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dapm.Adapter.ImageAdapter;
@@ -29,13 +32,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewImages;
     private TextView detailTitle, detailPrice, detailLocation,
             detailDescription, detailTinhTrang, detailBaoHanh, detailXuatXu, detailHDSD, detailSellerName;
+    private EditText editTitle, editPrice, editDescription, editLocation, editTinhTrang, editBaoHanh, editXuatXu, editHDSD;
     private ImageButton reportButton;
     private ImageView cancel, detailSellerAvatar, detailEdit, detailDelete, detailFavButton;
     private String sellerID, productID;
@@ -52,9 +58,13 @@ public class DetailActivity extends AppCompatActivity {
         addEvent();
         displayProductDetails();
         getSellerDetails();
+
     }
 
+    //Hàm thêm sự kiện
     private void addEvent() {
+        productID = getIntent().getStringExtra("productID");
+
         reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +100,50 @@ public class DetailActivity extends AppCompatActivity {
                 updateProductApprovalStatus("rejected");
             }
         });
+
+        detailDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo AlertDialog để xác nhận xóa
+                new AlertDialog.Builder(DetailActivity.this)
+                        .setTitle("Xác nhận xóa")
+                        .setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không?")
+                        .setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Thực hiện xóa sản phẩm khi người dùng xác nhận
+                                db.collection("products").document(productID)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(DetailActivity.this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                                finish(); // Đóng DetailActivity sau khi xóa
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(DetailActivity.this, "Xóa sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        })
+                        .setNegativeButton("Hủy", null) // Đóng dialog nếu chọn Hủy
+                        .show();
+            }
+        });
+
+
+        detailEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditBottomSheet();
+            }
+        });
     }
 
+    //Hàm thêm control
     private void addControl() {
         recyclerViewImages = findViewById(R.id.imageRecyclerView);
         detailTitle = findViewById(R.id.detailTitle);
@@ -119,6 +171,7 @@ public class DetailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
     }
 
+    //Hàm hiển thị thông tin sản phẩm
     private void displayProductDetails() {
         sellerID = getIntent().getStringExtra("sellerID");
         productID = getIntent().getStringExtra("productID");
@@ -155,6 +208,7 @@ public class DetailActivity extends AppCompatActivity {
         detailHDSD.setText("Hướng dẫn sử dụng: " + hdsd);
     }
 
+    //Hàm lấy thông tin người bán
     private void getSellerDetails() {
         sellerID = getIntent().getStringExtra("sellerID");
 
@@ -239,6 +293,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    //Hàm hiện báo cáo
     private void showReportBottomSheet() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DetailActivity.this);
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bao_cao_sp, null);
@@ -283,6 +338,7 @@ public class DetailActivity extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
+    //Hàm gửi báo cáo
     private void submitReport(ReportSP report) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("reports_sp")
@@ -293,7 +349,7 @@ public class DetailActivity extends AppCompatActivity {
                         Toast.makeText(DetailActivity.this, "Gửi báo cáo thất bại", Toast.LENGTH_SHORT).show());
     }
 
-
+    //Hàm mở cửa sổ xem profile
     private void setupViewStoreButton() {
         detailViewStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,6 +361,7 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    //Hàm chuyển sang chat
     private void goToChatDetail() {
         //Check xem đăng nhập chưa
         if (auth.getCurrentUser() == null) {
@@ -358,4 +415,86 @@ public class DetailActivity extends AppCompatActivity {
                     });
         }
     }
+
+    //Hàm hiện bottomsheet sửa sp
+    private void showEditBottomSheet() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DetailActivity.this);
+        View bottomSheetView = getLayoutInflater().inflate(R.layout.bottomsheet_edit, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+
+        // Liên kết các trường EditText trong BottomSheet với mã
+        editTitle = bottomSheetView.findViewById(R.id.editTitle);
+        editPrice = bottomSheetView.findViewById(R.id.editPrice);
+        editDescription = bottomSheetView.findViewById(R.id.editDescription);
+        editLocation = bottomSheetView.findViewById(R.id.editLocation);
+        editTinhTrang = bottomSheetView.findViewById(R.id.editTinhTrang);
+        editBaoHanh = bottomSheetView.findViewById(R.id.editBaoHanh);
+        editXuatXu = bottomSheetView.findViewById(R.id.editXuatXu);
+        editHDSD = bottomSheetView.findViewById(R.id.editHDSD);
+
+        // Thiết lập giá trị hiện tại vào các trường
+        editTitle.setText(detailTitle.getText().toString());
+        editPrice.setText(detailPrice.getText().toString());
+        editDescription.setText(detailDescription.getText().toString());
+        editLocation.setText(detailLocation.getText().toString());
+        editTinhTrang.setText(detailTinhTrang.getText().toString());
+        editBaoHanh.setText(detailBaoHanh.getText().toString());
+        editXuatXu.setText(detailXuatXu.getText().toString());
+        editHDSD.setText(detailHDSD.getText().toString());
+
+        // Xử lý nút lưu thay đổi
+        AppCompatButton btnSave = bottomSheetView.findViewById(R.id.saveButton);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gọi phương thức cập nhật sản phẩm lên Firestore
+                updateProductDetails();
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        bottomSheetDialog.show();
+    }
+
+    // Phương thức cập nhật thông tin sản phẩm lên Firestore
+    private void updateProductDetails() {
+        // Lấy các giá trị đã chỉnh sửa
+        String updatedTitle = editTitle.getText().toString().trim();
+        int updatedPrice = Integer.parseInt(editPrice.getText().toString().trim().replaceAll("[^\\d]", ""));
+        String updatedDescription = editDescription.getText().toString().trim();
+        String updatedLocation = editLocation.getText().toString().trim();
+        String updatedTinhTrang = editTinhTrang.getText().toString().trim();
+        String updatedBaoHanh = editBaoHanh.getText().toString().trim();
+        String updatedXuatXu = editXuatXu.getText().toString().trim();
+        String updatedHDSD = editHDSD.getText().toString().trim();
+
+        // Tạo một map chứa các trường cần cập nhật
+        Map<String, Object> updatedFields = new HashMap<>();
+        updatedFields.put("productTitle", updatedTitle);
+        updatedFields.put("productPrice", updatedPrice);
+        updatedFields.put("productDescription", updatedDescription);
+        updatedFields.put("productLocation", updatedLocation);
+        updatedFields.put("productTinhTrang", updatedTinhTrang);
+        updatedFields.put("productBaoHanh", updatedBaoHanh);
+        updatedFields.put("productXuatXu", updatedXuatXu);
+        updatedFields.put("productHDSD", updatedHDSD);
+
+        // Gửi cập nhật lên Firestore
+        db.collection("products").document(productID)
+                .update(updatedFields)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(DetailActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        displayProductDetails(); // Cập nhật giao diện
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetailActivity.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }
