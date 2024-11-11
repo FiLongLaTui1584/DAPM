@@ -18,10 +18,11 @@ public class Product implements Serializable {
     private String sellerID;
     private String categoryID;
     private String isApproved;
+    private int productQuantity;
 
     public Product() {}
 
-    public Product(String productID, String productImage1, String productImage2, String productImage3, String productTitle, int productPrice, String productLocation, String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu, String productHDSD, String sellerID, String categoryID, String isApproved) {
+    public Product(String productID, String productImage1, String productImage2, String productImage3, String productTitle, int productPrice, String productLocation, String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu, String productHDSD, String sellerID, String categoryID, String isApproved, int productQuantity) {
         this.productID = productID;
         this.productImage1 = productImage1;
         this.productImage2 = productImage2;
@@ -37,6 +38,7 @@ public class Product implements Serializable {
         this.sellerID = sellerID;
         this.categoryID = categoryID;
         this.isApproved = isApproved;
+        this.productQuantity = productQuantity;
     }
 
     public String getProductID() {
@@ -157,5 +159,13 @@ public class Product implements Serializable {
 
     public void setIsApproved(String isApproved) {
         this.isApproved = isApproved;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

@@ -144,17 +144,31 @@
             android:background="@drawable/ic_delete"
             />
       </LinearLayout>
-      <TextView
-          android:id="@+id/detailPrice"
-          android:textColor="@color/red"
-          android:textSize="25sp"
-          android:textStyle="bold"
-          android:layout_marginBottom="5dp"
-          android:layout_marginStart="30dp"
+      <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="9.999.999 đ"
-          />
+          android:orientation="horizontal"
+          android:layout_marginBottom="5dp"
+          android:gravity="center"
+          android:layout_marginHorizontal="30dp">
+        <TextView
+            android:id="@+id/detailPrice"
+            android:textColor="@color/red"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:text="9.999.999 đ" />
+        <TextView
+            android:id="@+id/detailQuantity"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Còn 2 sản phẩm" />
+      </LinearLayout>
       <TextView
           android:id="@+id/detailLocation"
           android:textColor="@color/black"

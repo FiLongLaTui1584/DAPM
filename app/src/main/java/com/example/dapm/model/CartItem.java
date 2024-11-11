@@ -1,57 +1,52 @@
 package com.example.dapm.model;
 
 public class CartItem {
-    private String name;
-    private int imageRes;
-    private String size;
-    private String quantity;
-    private String price;
+    private String productID;
+    private String cartProductName;
+    private String cartProductImage;
+    private int cartProductPrice;
+    private int cartQuantity;
+    private boolean selected;
 
-    public String getName() {
-        return name;
+    public CartItem(String productID, String cartProductName, String cartProductImage,
+                    int cartProductPrice, int cartQuantity) {
+        this.productID = productID;
+        this.cartProductName = cartProductName;
+        this.cartProductImage = cartProductImage;
+        this.cartProductPrice = cartProductPrice;
+        this.cartQuantity = cartQuantity;
+        this.selected = false;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getProductID() {
+        return productID;
     }
 
-    public int getImageRes() {
-        return imageRes;
+    public String getCartProductName() {
+        return cartProductName;
     }
 
-    public void setImageRes(int imageRes) {
-        this.imageRes = imageRes;
+    public String getCartProductImage() {
+        return cartProductImage;
     }
 
-    public String getSize() {
-        return size;
+    public int getCartProductPrice() {
+        return cartProductPrice;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public int getCartQuantity() {
+        return cartQuantity;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public void setCartQuantity(int cartQuantity) {
+        this.cartQuantity = cartQuantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public boolean isSelected() {
+        return selected;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public CartItem(String name, int imageRes, String size, String quantity, String price) {
-        this.name = name;
-        this.imageRes = imageRes;
-        this.size = size;
-        this.quantity = quantity;
-        this.price = price;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

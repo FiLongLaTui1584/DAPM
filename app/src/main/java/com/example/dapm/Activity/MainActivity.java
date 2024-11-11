@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView cancel = bottomSheetDialog.findViewById(R.id.cancelButton);
         EditText titleInput = bottomSheetDialog.findViewById(R.id.uploadTiltle);
         EditText priceInput = bottomSheetDialog.findViewById(R.id.uploadPrice);
+        EditText quantityInput = bottomSheetDialog.findViewById(R.id.uploadQuantity);
         EditText descriptionInput = bottomSheetDialog.findViewById(R.id.uploadDescription);
         EditText locationInput = bottomSheetDialog.findViewById(R.id.uploadLocation);
         EditText tinhTrangInput = bottomSheetDialog.findViewById(R.id.uploadTinhTrang);
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             String title = titleInput.getText().toString();
             String price = priceInput.getText().toString();
+            String quantity = quantityInput.getText().toString();
             String description = descriptionInput.getText().toString();
             String location = locationInput.getText().toString();
             String tinhTrang = tinhTrangInput.getText().toString();
@@ -153,12 +155,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if (title.isEmpty() || price.isEmpty() || description.isEmpty() || location.isEmpty() || selectedImages.size() < 3) {
+            if (title.isEmpty() || price.isEmpty() || description.isEmpty() || location.isEmpty() || selectedImages.size() != 3) {
                 Toast.makeText(MainActivity.this, "Vui lòng nhập đủ thông tin và chọn 3 ảnh", Toast.LENGTH_SHORT).show();
             } else {
-                uploadImagesToStorage(title, Integer.parseInt(price), description, location, tinhTrang, baoHanh, xuatXu, hdsd, categoryID);
-                Toast.makeText(MainActivity.this, "Sản phẩm đã được tải lên thành công", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "Chờ quản trị viên duyệt sản phẩm", Toast.LENGTH_SHORT).show();
+                uploadImagesToStorage(title, Integer.parseInt(price), description, location, tinhTrang, baoHanh, xuatXu, hdsd, categoryID, Integer.parseInt(quantity));
             }
         });
 
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
     );
 
-    private void uploadImagesToStorage(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, String categoryID) {
+    private void uploadImagesToStorage(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, String categoryID, int quantity) {
         List<String> imageUrls = new ArrayList<>();
         for (int i = 0; i < selectedImages.size(); i++) {
             Uri imageUri = selectedImages.get(i);
@@ -203,14 +203,14 @@ public class MainActivity extends AppCompatActivity {
 
                         if (imageUploadCount == selectedImages.size()) {
                             // Gọi phương thức lưu sản phẩm với categoryID
-                            saveProductToFirestore(title, price, description, location, tinhTrang, baoHanh, xuatXu, hdsd, imageUrls, categoryID);
+                            saveProductToFirestore(title, price, description, location, tinhTrang, baoHanh, xuatXu, hdsd, imageUrls, categoryID, quantity);
                         }
                     }))
                     .addOnFailureListener(e -> Log.e("MainActivity", "Error uploading image", e));
         }
     }
 
-    private void saveProductToFirestore(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, List<String> imageUrls, String categoryID) {
+    private void saveProductToFirestore(String title, int price, String description, String location, String tinhTrang, String baoHanh, String xuatXu, String hdsd, List<String> imageUrls, String categoryID, int quantity) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) return;
 
@@ -225,13 +225,15 @@ public class MainActivity extends AppCompatActivity {
                 imageUrls.size() > 0 ? imageUrls.get(0) : null,
                 imageUrls.size() > 1 ? imageUrls.get(1) : null,
                 imageUrls.size() > 2 ? imageUrls.get(2) : null,
-                title, price, location, description, tinhTrang, baoHanh, xuatXu, hdsd, sellerID, categoryID, "pending"
+                title, price, location, description, tinhTrang, baoHanh, xuatXu, hdsd, sellerID, categoryID, "pending", quantity
         );
 
         productRef.set(product)
                 .addOnSuccessListener(aVoid -> {
                     // Hiển thị thông báo khi sản phẩm được đăng thành công
-                    Toast.makeText(MainActivity.this, "Đăng sản phẩm thành công", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(MainActivity.this, "Sản phẩm đã được tải lên thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Chờ quản trị viên duyệt sản phẩm", Toast.LENGTH_SHORT).show();
                     // Reset imageUploadCount và selectedImages sau khi đăng thành công
                     imageUploadCount = 0;
                     selectedImages.clear();

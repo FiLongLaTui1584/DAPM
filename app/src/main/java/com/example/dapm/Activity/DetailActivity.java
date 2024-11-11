@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,15 +38,14 @@ import java.util.List;
 import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
-
     private RecyclerView recyclerViewImages;
-    private TextView detailTitle, detailPrice, detailLocation,
+    private TextView detailTitle, detailPrice, detailLocation, detailQuantity,
             detailDescription, detailTinhTrang, detailBaoHanh, detailXuatXu, detailHDSD, detailSellerName;
-    private EditText editTitle, editPrice, editDescription, editLocation, editTinhTrang, editBaoHanh, editXuatXu, editHDSD;
+    private EditText editTitle, editPrice, editDescription, editLocation, editTinhTrang, editBaoHanh, editXuatXu, editHDSD, editQuantity;
     private ImageButton reportButton;
     private ImageView cancel, detailSellerAvatar, detailEdit, detailDelete, detailFavButton;
     private String sellerID, productID;
-    private LinearLayout detailViewStoreButton, detailChatButton, detailSellerInfo,approveButton, rejectButton;
+    private LinearLayout detailViewStoreButton, detailChatButton, detailSellerInfo,approveButton, rejectButton, detailCartButton;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
@@ -141,6 +141,14 @@ public class DetailActivity extends AppCompatActivity {
                 showEditBottomSheet();
             }
         });
+
+        detailCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCart();
+            }
+        });
+
     }
 
     //Hàm thêm control
@@ -154,6 +162,7 @@ public class DetailActivity extends AppCompatActivity {
         detailBaoHanh = findViewById(R.id.detailBaoHanh);
         detailXuatXu = findViewById(R.id.detailXuatXu);
         detailHDSD = findViewById(R.id.detailHDSD);
+        detailQuantity = findViewById(R.id.detailQuantity);
         detailSellerAvatar = findViewById(R.id.detailSellerAvatar);
         detailSellerName = findViewById(R.id.detailSellerName);
         reportButton = findViewById(R.id.reportButton);
@@ -166,6 +175,7 @@ public class DetailActivity extends AppCompatActivity {
         detailFavButton= findViewById(R.id.detailFavButton);
         approveButton = findViewById(R.id.approveButton);
         rejectButton = findViewById(R.id.rejectButton);
+        detailCartButton = findViewById(R.id.detailCartButton);
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -187,6 +197,7 @@ public class DetailActivity extends AppCompatActivity {
         String baoHanh = getIntent().getStringExtra("productBaoHanh");
         String xuatXu = getIntent().getStringExtra("productXuatXu");
         String hdsd = getIntent().getStringExtra("productHDSD");
+        int productQuantity = getIntent().getIntExtra("productQuantity", 0);
 
 
         List<String> imageUrls = new ArrayList<>();
@@ -206,6 +217,7 @@ public class DetailActivity extends AppCompatActivity {
         detailBaoHanh.setText("Chính sách bảo hành: " + baoHanh);
         detailXuatXu.setText("Xuất xứ: " + xuatXu);
         detailHDSD.setText("Hướng dẫn sử dụng: " + hdsd);
+        detailQuantity.setText("Còn " + String.valueOf(productQuantity) + " sản phẩm");
     }
 
     //Hàm lấy thông tin người bán
@@ -425,6 +437,7 @@ public class DetailActivity extends AppCompatActivity {
         // Liên kết các trường EditText trong BottomSheet với mã
         editTitle = bottomSheetView.findViewById(R.id.editTitle);
         editPrice = bottomSheetView.findViewById(R.id.editPrice);
+        editQuantity = bottomSheetView.findViewById(R.id.editQuantity);
         editDescription = bottomSheetView.findViewById(R.id.editDescription);
         editLocation = bottomSheetView.findViewById(R.id.editLocation);
         editTinhTrang = bottomSheetView.findViewById(R.id.editTinhTrang);
@@ -435,6 +448,7 @@ public class DetailActivity extends AppCompatActivity {
         // Thiết lập giá trị hiện tại vào các trường
         editTitle.setText(detailTitle.getText().toString());
         editPrice.setText(detailPrice.getText().toString());
+        editQuantity.setText(detailQuantity.getText().toString());
         editDescription.setText(detailDescription.getText().toString());
         editLocation.setText(detailLocation.getText().toString());
         editTinhTrang.setText(detailTinhTrang.getText().toString());
@@ -461,6 +475,7 @@ public class DetailActivity extends AppCompatActivity {
         // Lấy các giá trị đã chỉnh sửa
         String updatedTitle = editTitle.getText().toString().trim();
         int updatedPrice = Integer.parseInt(editPrice.getText().toString().trim().replaceAll("[^\\d]", ""));
+        int updatedQuantity = Integer.parseInt(editQuantity.getText().toString().trim());
         String updatedDescription = editDescription.getText().toString().trim();
         String updatedLocation = editLocation.getText().toString().trim();
         String updatedTinhTrang = editTinhTrang.getText().toString().trim();
@@ -472,6 +487,7 @@ public class DetailActivity extends AppCompatActivity {
         Map<String, Object> updatedFields = new HashMap<>();
         updatedFields.put("productTitle", updatedTitle);
         updatedFields.put("productPrice", updatedPrice);
+        updatedFields.put("productQuantity", updatedQuantity);
         updatedFields.put("productDescription", updatedDescription);
         updatedFields.put("productLocation", updatedLocation);
         updatedFields.put("productTinhTrang", updatedTinhTrang);
@@ -497,4 +513,38 @@ public class DetailActivity extends AppCompatActivity {
                 });
     }
 
+    //Phương thức thêm sản phẩm vào giỏ hàng, số lượng mặc định 1
+    private void addToCart() {
+        //Check xem đăng nhập chưa
+        if (auth.getCurrentUser() == null) {
+            Intent loginIntent = new Intent(DetailActivity.this, DangNhapActivity.class);
+            startActivity(loginIntent);
+        }
+        else {
+            String currentUserID = auth.getCurrentUser().getUid();
+
+            // Tạo đối tượng cartItem để thêm vào giỏ hàng
+            Map<String, Object> cartItem = new HashMap<>();
+            cartItem.put("productID", productID);  // ID sản phẩm
+            cartItem.put("cartQuantity", 1);  // Số lượng mặc định là 1
+
+            // Thêm sản phẩm vào giỏ hàng của người dùng
+            db.collection("carts").document(currentUserID)
+                    .collection("cartItems")
+                    .document(productID)  // Dùng productID làm document ID trong cartItems
+                    .set(cartItem)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(DetailActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(DetailActivity.this, "Không thể thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
 }

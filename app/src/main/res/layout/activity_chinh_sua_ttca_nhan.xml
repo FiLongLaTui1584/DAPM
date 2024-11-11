@@ -169,6 +169,88 @@
                     android:gravity="top"
                     android:maxLines="4" />
             </LinearLayout>
+            <TextView
+                android:textColor="#464B4C"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="30dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Thông tin ngân hàng" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_text"
+                        android:paddingVertical="6dp"
+                        android:paddingHorizontal="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tên ngân hàng"
+                            android:textColor="#464B4C"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="6dp" />
+
+                        <EditText
+                            android:id="@+id/change_bankName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:background="@android:color/transparent"
+                            android:inputType="text" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_text"
+                        android:paddingVertical="6dp"
+                        android:paddingHorizontal="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Số tài khoản ngân hàng"
+                            android:textColor="#464B4C"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="6dp" />
+
+                        <EditText
+                            android:id="@+id/change_bankNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:background="@android:color/transparent"
+                            android:inputType="number" />
+                    </LinearLayout>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/change_bankImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/sample_bank_img"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

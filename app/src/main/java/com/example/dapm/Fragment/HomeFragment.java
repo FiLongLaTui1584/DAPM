@@ -135,13 +135,14 @@ public class HomeFragment extends Fragment {
                         String sellerID = document.getString("sellerID");
                         String categoryID = document.getString("categoryID");
                         String isApproved = document.getString("isApproved");
+                        int productQuantity  = document.contains("productQuantity") ? document.getLong("productQuantity").intValue() : 0;
 
                         // Chỉ thêm sản phẩm vào danh sách nếu đã được duyệt
                         if ("approved".equals(isApproved)) {
                             Product product = new Product(
                                     productID, productImage1, productImage2, productImage3, title, price, location,
                                     productDescription, productTinhTrang, productBaoHanh, productXuatXu,
-                                    productHDSD, sellerID, categoryID, isApproved
+                                    productHDSD, sellerID, categoryID, isApproved, productQuantity
                             );
                             allProducts.add(product);
                             productList.add(product);
