@@ -1,20 +1,41 @@
 package com.example.dapm.model;
 
-public class OrderThanhToan {
-    private int imageResource;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class OrderThanhToan implements Parcelable {
+    private String imageResource;
     private String name;
-    private String price;
+    private int price;
     private int quantity;
 
-    public OrderThanhToan(int imageResource, String name, String price, int quantity) {
+    public OrderThanhToan(String imageResource, String name, int price, int quantity) {
         this.imageResource = imageResource;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
     }
 
-    // Getters
-    public int getImageResource() {
+    protected OrderThanhToan(Parcel in) {
+        imageResource = in.readString();
+        name = in.readString();
+        price = in.readInt();
+        quantity = in.readInt();
+    }
+
+    public static final Creator<OrderThanhToan> CREATOR = new Creator<OrderThanhToan>() {
+        @Override
+        public OrderThanhToan createFromParcel(Parcel in) {
+            return new OrderThanhToan(in);
+        }
+
+        @Override
+        public OrderThanhToan[] newArray(int size) {
+            return new OrderThanhToan[size];
+        }
+    };
+
+    public String getImageResource() {
         return imageResource;
     }
 
@@ -22,12 +43,24 @@ public class OrderThanhToan {
         return name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
     public int getQuantity() {
         return quantity;
     }
-}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(imageResource);
+        dest.writeString(name);
+        dest.writeInt(price);
+        dest.writeInt(quantity);
+    }
+}

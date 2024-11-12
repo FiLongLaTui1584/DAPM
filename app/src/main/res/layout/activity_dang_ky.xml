@@ -119,12 +119,10 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <Button
+                <CheckBox
                     android:id="@+id/tickButton"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/style_tick_sigup"
-                    android:drawableEnd="@drawable/ic_tick"
                     android:drawablePadding="5dp"
                     android:layout_marginEnd="8dp" />
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dapm.R;
 import com.example.dapm.model.OrderThanhToan;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,9 +36,14 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderThanhToan order = orderList.get(position);
-        holder.orderImage.setImageResource(order.getImageResource());
+
+        // Load image using Picasso
+        Picasso.get().load(order.getImageResource())
+                .placeholder(R.drawable.sample_image)
+                .into(holder.orderImage);
+
         holder.orderName.setText(order.getName());
-        holder.orderPrice.setText(order.getPrice());
+        holder.orderPrice.setText(String.format("%,d VNĐ", order.getPrice()));
         holder.orderQuantity.setText("x " + order.getQuantity());
     }
 
@@ -59,4 +65,3 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
         }
     }
 }
-

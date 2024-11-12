@@ -27,13 +27,13 @@ public class OrderDetailActivity extends AppCompatActivity {
         orderDetailView.setLayoutManager(new LinearLayoutManager(this));
 
         // Example order data
-        orderList = new ArrayList<>();
+        /*orderList = new ArrayList<>();
         orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 1", "123.456 VND", 1));
         orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 2", "789.012 VND", 2));
         orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 1", "123.456 VND", 1));
         orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 2", "789.012 VND", 2));
         orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 1", "123.456 VND", 1));
-        orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 2", "789.012 VND", 2));
+        orderList.add(new OrderThanhToan(R.drawable.sample_image, "Product 2", "789.012 VND", 2));*/
 
         orderDetailAdapter = new CheckOutAdapter(orderList, this);
         orderDetailView.setAdapter(orderDetailAdapter);
