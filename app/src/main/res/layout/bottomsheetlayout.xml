@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/main"
+<LinearLayout
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -48,143 +49,155 @@
         android:layout_marginBottom="12dp"
         />
 
-    <Spinner
-        android:id="@+id/categorySpinner"
+    <!-- Scrollable Content -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginVertical="5dp" />
+        android:fillViewport="true">
 
-    <!-- EditText Fields -->
-    <EditText
-        android:id="@+id/uploadTiltle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:hint="Tiêu đề"
-        android:layout_marginVertical="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/uploadPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:inputType="number"
-        android:textSize="14sp"
-        android:hint="Giá"
-        android:layout_marginVertical="5dp" />
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:inputType="number"
-        android:textSize="14sp"
-        android:hint="Số lượng"
-        android:layout_marginVertical="5dp" />
+            <!-- EditText Fields -->
+            <EditText
+                android:id="@+id/uploadTiltle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:hint="Tiêu đề"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:hint="Mô tả"
-        android:inputType="text"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:hint="Giá"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:hint="Địa chỉ"
-        android:inputType="text"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:hint="Số lượng"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadTinhTrang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:inputType="text"
-        android:hint="Tình trạng"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Mô tả"
+                android:inputType="text"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadBaoHanh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:hint="Bảo hành"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:hint="Địa chỉ"
+                android:inputType="text"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadXuatXu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:inputType="text"
-        android:hint="Xuất xứ"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadTinhTrang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:hint="Tình trạng"
+                android:layout_marginVertical="5dp" />
 
-    <EditText
-        android:id="@+id/uploadHDSD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_text"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:inputType="text"
-        android:hint="Hướng dẫn sử dụng"
-        android:layout_marginVertical="5dp" />
+            <EditText
+                android:id="@+id/uploadBaoHanh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:hint="Bảo hành"
+                android:layout_marginVertical="5dp" />
 
+            <EditText
+                android:id="@+id/uploadXuatXu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:hint="Xuất xứ"
+                android:layout_marginVertical="5dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Lưu"
-        android:id="@+id/saveButton"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/style_button_yellow"
-        app:cornerRadius="20dp"/>
+            <EditText
+                android:id="@+id/uploadHDSD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:hint="Hướng dẫn sử dụng"
+                android:layout_marginVertical="5dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Lưu"
+                android:id="@+id/saveButton"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/style_button_yellow"
+                app:cornerRadius="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
-
