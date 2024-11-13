@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dapm.Activity.CheckOutActivity;
+import com.example.dapm.Activity.DangNhapActivity;
 import com.example.dapm.Adapter.CartAdapter;
 import com.example.dapm.R;
 import com.example.dapm.model.CartItem;
 import com.example.dapm.model.OrderThanhToan;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -43,6 +45,17 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Intent intent = new Intent(getActivity(), DangNhapActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+            return rootView;
+        }
 
         recyclerView = rootView.findViewById(R.id.cartRecyclerview);
         cartCheckOut = rootView.findViewById(R.id.cartCheckOut);
