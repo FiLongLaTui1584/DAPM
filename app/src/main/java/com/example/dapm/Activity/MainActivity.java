@@ -76,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+
+            // check user đăng nhập chưa khi vào TinDangFragment và CartFragment
+            if (currentUser == null && (itemId == R.id.tindang || itemId == R.id.giohang)) {
+                Toast.makeText(this, "Vui lòng đăng nhập để truy cập tính năng này.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.tindang) {
