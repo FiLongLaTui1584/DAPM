@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide; // Thêm thư viện Glide
 import com.example.dapm.Activity.ChinhSuaTTCaNhanActivity;
 import com.example.dapm.Activity.DangNhapActivity;
+import com.example.dapm.Activity.QuanLyYeuThichActivity;
 import com.example.dapm.Activity.TheoDoiThuNhapActivity;
 import com.example.dapm.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class AccountFragment extends Fragment {
-
+    private LinearLayout FavBut;
     private LinearLayout don_ban;
     private LinearLayout layoutLoggedOut;
     private LinearLayout layoutLoggedIn;
@@ -48,6 +49,14 @@ public class AccountFragment extends Fragment {
     }
 
     private void addEvent() {
+        FavBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QuanLyYeuThichActivity.class);
+                startActivity(intent);
+            }
+        });
+
         don_ban.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), TheoDoiThuNhapActivity.class);
             startActivity(intent);
@@ -103,6 +112,7 @@ public class AccountFragment extends Fragment {
         editAccount = view.findViewById(R.id.edit_account);
         dangXuat = view.findViewById(R.id.dang_xuat);
         accountAvt = view.findViewById(R.id.account_avt);
+        FavBut= view.findViewById(R.id.FavBut);
     }
 
     private void updateUI() {

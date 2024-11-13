@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,19 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DAPM"
-        tools:targetApi="34">
-        <activity
-            android:name=".Activity.CategoryProductsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.SearchResultsActivity"
-            android:exported="false" />
+        tools:targetApi="31">
+
         <activity
             android:name=".Activity.CheckOutActivity"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.XemProfileUserKhacActivity"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.TheoDoiThuNhapActivity"
             android:exported="true" />
@@ -45,12 +41,15 @@
         <activity
             android:name=".Activity.ChinhSuaTTCaNhanActivity"
             android:exported="true" />
+
+        <activity android:name=".Activity.ReportDetailActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activity.DetailActivity"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.DangNhapActivity"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.DangKyActivity"
             android:exported="true" />

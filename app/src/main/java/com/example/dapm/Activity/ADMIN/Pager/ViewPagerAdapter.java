@@ -24,19 +24,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new TatCaNguoiDungFragment();
-            case 1:
                 return new BiBaoCaoFragment();
-            case 2:
+            case 1:
                 return new BiKhoaFragment();
             default:
-                return new TatCaNguoiDungFragment();
+                return new BiBaoCaoFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
 
@@ -46,12 +44,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String title = "";
         switch (position){
             case 0:
-                title= "Tất cả người dùng";
-                break;
-            case 1:
                 title= "Bị báo cáo";
                 break;
-            case 2:
+            case 1:
                 title= "Bị khoá";
                 break;
         }

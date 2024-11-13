@@ -11,17 +11,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dapm.Activity.ADMIN.AdminActivity;
 import com.example.dapm.Fragment.HomeFragment;
 import com.example.dapm.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Date;
 
 public class DangNhapActivity extends AppCompatActivity {
 
@@ -71,6 +75,8 @@ public class DangNhapActivity extends AppCompatActivity {
         });
 
         cancel.setOnClickListener(v -> finish());
+
+
     }
 
     private void addControl() {
@@ -97,19 +103,28 @@ public class DangNhapActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         String uid = mAuth.getCurrentUser().getUid();
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        checkUserAccessLevel(uid);
+                        db.collection("users").document(uid).get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    Boolean isLocked = documentSnapshot.getBoolean("isLocked");
+                                    Timestamp lockExpiration = documentSnapshot.getTimestamp("lockExpiration");
 
-                        //Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                        /*Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();*/
+                                    if (isLocked != null && isLocked) {
+                                        Date now = new Date();
+                                        if (lockExpiration == null || lockExpiration.toDate().after(now)) {
+                                            showAccountLockedDialog(lockExpiration);
+                                        } else {
+                                            documentSnapshot.getReference().update("isLocked", false, "lockExpiration", null);
+                                            checkUserAccessLevel(uid);
+                                        }
+                                    } else {
+                                        checkUserAccessLevel(uid);
+                                    }
+                                });
                     } else {
                         Toast.makeText(DangNhapActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
     private void sendPasswordResetEmail(String email) {
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(this, task -> {
@@ -120,6 +135,19 @@ public class DangNhapActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    private void showAccountLockedDialog(Timestamp lockExpiration) {
+        String message = (lockExpiration == null) ? "Tài khoản của bạn đã bị khóa vĩnh viễn, vui lòng gửi email đến longadmin@gmail.com để được giúp đỡ."
+                : "Tài khoản của bạn bị khóa đến: " + lockExpiration.toDate() +"vui lòng gửi email đến longadmin@gmail.com để được giúp đỡ";
+
+        new AlertDialog.Builder(this)
+                .setTitle("Tài khoản bị khóa")
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 
 
     private void checkUserAccessLevel(String uid) {
@@ -144,6 +172,9 @@ public class DangNhapActivity extends AppCompatActivity {
             Toast.makeText(DangNhapActivity.this, "Lỗi truy vấn quyền người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
+
+
+
 
 }
 

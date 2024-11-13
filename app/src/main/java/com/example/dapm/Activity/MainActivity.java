@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +36,7 @@ import com.example.dapm.model.Product;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -64,13 +66,46 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         firestore = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        // Kiểm tra tình trạng khóa tài khoản
+        if (currentUser != null) {
+            firestore.collection("users").document(currentUser.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Boolean isLocked = documentSnapshot.getBoolean("isLocked");
+                            Timestamp lockExpiration = documentSnapshot.getTimestamp("lockExpiration");
 
+                            if (Boolean.TRUE.equals(isLocked)) {
+                                showAccountLockedDialog(lockExpiration);
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(MainActivity.this, DangNhapActivity.class));
+                                finish(); // Đóng MainActivity
+                            } else {
+                                initMainActivity(); // Hàm khởi tạo MainActivity sau khi kiểm tra xong
+                            }
+                        }
+                    });
+        } else {
+            initMainActivity(); // Khởi tạo nếu không có người dùng đã đăng nhập
+        }
+    }
 
+    private void showAccountLockedDialog(Timestamp lockExpiration) {
+        String message = (lockExpiration == null) ? "Tài khoản của bạn đã bị khóa vĩnh viễn."
+                : "Tài khoản của bạn bị khóa đến: " + lockExpiration.toDate();
+
+        new AlertDialog.Builder(this)
+                .setTitle("Tài khoản bị khóa")
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    // Hàm khởi tạo MainActivity (bỏ phần khởi tạo từ onCreate vào đây)
+    private void initMainActivity() {
         replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setBackground(null);
 
@@ -82,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng đăng nhập để truy cập tính năng này.", Toast.LENGTH_SHORT).show();
                 return false;
             }
-
             if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.tindang) {

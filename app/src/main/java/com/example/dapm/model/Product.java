@@ -20,6 +20,9 @@ public class Product implements Serializable {
     private String isApproved;
     private int productQuantity;
 
+
+    private boolean isFavorite;
+
     public Product() {}
 
     public Product(String productID, String productImage1, String productImage2, String productImage3, String productTitle, int productPrice, String productLocation, String productDescription, String productTinhTrang, String productBaoHanh, String productXuatXu, String productHDSD, String sellerID, String categoryID, String isApproved, int productQuantity) {
@@ -167,5 +170,16 @@ public class Product implements Serializable {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+
+
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }
